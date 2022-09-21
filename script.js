@@ -119,9 +119,15 @@ function getPixelData(canvas, ctx) {
 //  ASCII
 //  =====
 
-const CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._                                            ";
+let CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._ ";
 // const CHARSET = '       .:-i|=+%O#@'
 // const CHARSET = '        .:░▒▓█';
+
+const slider = document.getElementById('slider')
+
+slider.addEventListener('input', (e) => {
+    CHARSET = CHARSET.trimEnd() + ' '.repeat(e.target.value + 1)
+})
 
 const getChar = (scale) => {
     const val = Math.floor((scale / 255) * (CHARSET.length - 1))
