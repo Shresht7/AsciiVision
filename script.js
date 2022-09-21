@@ -18,6 +18,12 @@ const HEIGHT = 90
 /** @type HTMLVideoElement */
 const video = document.getElementById('video')
 
+let facingMode = 'user'
+const toggleFacingMode = () => facingMode === 'user' ? 'environment' : 'user'
+
+const toggleCameraButton = document.getElementById('toggle-camera')
+toggleCameraButton.addEventListener('click', toggleFacingMode)
+
 /**
  * Capture the video stream using the navigator's mediaDevices api
  * @param {HTMLVideoElement} video Video element to play the stream
@@ -28,6 +34,7 @@ async function captureVideoStream(video, start = true) {
         video: {
             width: WIDTH,
             height: HEIGHT,
+            facingMode
         },
         audio: false,
     })
