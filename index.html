@@ -13,16 +13,26 @@
 </head>
 
 <body>
+
     <main>
+
+        <div id="control-panel">
+            <input id="slider" type="range" min="0" max="25" value="12" />
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+        </div>
+
+        <div id="ascii-video-container">
+            <div id="ascii-video"></div>
+        </div>
+
+    </main>
+
+    <aside>
         <video id="video">Video Steam Unavailable</video>
         <canvas id="video-canvas"></canvas>
-        <div id="ascii-video"></div>
-    </main>
-    <aside>
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
-        <input id="slider" type="range" min="0" max="25" value="12" />
     </aside>
+
 </body>
 
 </html>

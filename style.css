@@ -1,3 +1,7 @@
+/* ========= */
+/* NORMALIZE */
+/* ========= */
+
 *,
 *::before,
 *::after {
@@ -8,30 +12,143 @@
 
 html,
 body {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    display: grid;
+    place-content: center;
 }
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* ================ */
+/* USER PREFERENCES */
+/* ================ */
+
+/* Remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ====== */
+/* COLORS */
+/* ====== */
+
+:root {
+    --clr-dark: 230 35% 7%;
+    --clr-light: 231 77% 90%;
+    --clr-white: 0 0% 100%;
+}
+
+.bg-dark {
+    background-color: hsl(var(--clr-dark));
+}
+
+.bg-light {
+    background-color: hsl(var(--clr-light));
+}
+
+.bg-white {
+    background-color: hsl(var(--clr-white));
+}
+
+.text-dark {
+    color: hsl(var(--clr-dark));
+}
+
+.text-light {
+    color: hsl(var(--clr-light));
+}
+
+.text-white {
+    color: hsl(var(--clr-white));
+}
+
+/* ======= */
+/* GENERAL */
+/* ======= */
+
+button {
+    font-family: inherit;
+    padding: 0.33rem 0.25rem;
+}
+
+/* ====== */
+/* LAYOUT */
+/* ====== */
 
 main {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    gap: 3rem;
+    width: 100vw;
+    padding: 1rem 1rem;
 }
+
+#control-panel {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 5rem;
+}
+
+#control-panel>* {
+    width: 100%;
+}
+
+#ascii-video-container {
+    flex: 3;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+}
+
+
 
 #ascii-video {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 6px;
-    line-height: 6px;
-    color: black;
+    font-size: 8px;
+    line-height: 8px;
     height: 100%;
     width: 100%;
+}
+
+#video {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border-radius: 0.5rem;
+}
+
+#video-canvas {
+    display: none;
 }
