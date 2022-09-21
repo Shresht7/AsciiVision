@@ -26,3 +26,12 @@ main {
     justify-content: start;
     align-items: center;
 }
+
+#ascii-video {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 6px;
+    line-height: 6px;
+    color: black;
+    height: 100%;
+    width: 100%;
+}
