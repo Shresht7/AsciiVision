@@ -19,7 +19,10 @@ const HEIGHT = 90
 const video = document.getElementById('video')
 
 let facingMode = 'user'
-const toggleFacingMode = () => facingMode = facingMode === 'user' ? 'environment' : 'user'
+const toggleFacingMode = () => {
+    facingMode = facingMode === 'user' ? 'environment' : 'user'
+    captureVideoStream(video)
+}
 
 const toggleCameraButton = document.getElementById('toggle-camera')
 toggleCameraButton.addEventListener('click', toggleFacingMode)
