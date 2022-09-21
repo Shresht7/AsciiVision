@@ -30,7 +30,7 @@ html,
 body {
     min-height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-family: 'Ubuntu Mono', monospace;
 }
 
@@ -98,6 +98,12 @@ main {
     gap: 3rem;
     width: 100vw;
     padding: 1rem 1rem;
+}
+
+@media screen and (max-width: 640px) {
+    main {
+        flex-direction: column-reverse;
+    }
 }
 
 #control-panel {
