@@ -21,14 +21,20 @@
 
 <body>
 
+    <header>
+        <h1>AsciiVision</h1>
+    </header>
+
     <main>
 
-        <div id="control-panel">
-            <input id="slider" type="range" min="0" max="25" value="12" />
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <button id="toggle-camera">Toggle Camera</button>
-        </div>
+        <section id="control-panel">
+            <h2>Control Panel</h2>
+            <label for="sensitivity-slider">Sensitivity</label>
+            <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="25" value="12" />
+            <button type="button" id="toggle-camera">Toggle Camera</button>
+            <button type="button" id="start">Start</button>
+            <button type="button" id="stop">Stop</button>
+        </section>
 
         <div id="ascii-video-container">
             <div id="ascii-video"></div>
@@ -42,7 +48,7 @@
     </aside>
 
     <footer>
-        <button id="toggle-theme">🌙</button>
+        <button type="button" id="toggle-theme">🌙</button>
     </footer>
 
 </body>
