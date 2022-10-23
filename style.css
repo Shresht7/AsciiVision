@@ -4,14 +4,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap');
 
-/* ====== */
-/* COLORS */
-/* ====== */
+/* ============= */
+/* CSS VARIABLES */
+/* ============= */
 
 :root {
-    --clr-dark: 0, 0%, 18%;
-    --clr-light: 0 0% 100%;
-    --clr-white: 0 0% 100%;
+
+    /* COLORS */
+    /* ------ */
+
+    --color-black: hsl(0, 0%, 18%);
+    --color-white: hsl(0, 0%, 100%);
+
+    --color-dark: var(--color-black);
+    --color-light: var(--color-white);
+
 }
 
 /* ========= */
@@ -38,13 +45,13 @@ body {
     position: relative;
     display: grid;
     place-content: center;
-    background-color: hsl(var(--clr-light));
-    color: hsl(var(--clr-dark));
+    background-color: var(--color-light);
+    color: var(--color-black);
 }
 
-body.dark-mode {
-    background-color: hsl(var(--clr-dark));
-    color: hsl(var(--clr-light));
+.dark-mode {
+    --color-light: var(--color-black);
+    --color-dark: var(--color-white);
 }
 
 img,
