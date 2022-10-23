@@ -1,18 +1,32 @@
+//@ts-check
+
+//  Library
 import { WIDTH, HEIGHT } from './constants.js'
 
 // =====
 // VIDEO
 // =====
 
+/** Video element that plays the user media stream */
 export class Video {
 
     /** @type HTMLVideoElement */
     element
-    facingMode = 'user'
-    isPlaying = false;
 
+    /** @type {'user' | 'environment'} */
+    facingMode = 'user'
+
+    /** @type boolean */
+    get isPlaying() {
+        return !this.element.paused
+    }
+
+    /**
+     * @param {string} id ID of the video element get user media stream from
+     * @param {'user' | 'environment'} facingMode Camera facing mode 
+     */
     constructor(id, facingMode = 'user') {
-        this.element = document.getElementById(id)
+        this.element = /** @type HTMLVideoElement */ (document.getElementById(id))
         this.facingMode = facingMode
     }
 
@@ -37,13 +51,14 @@ export class Video {
         })
         this.element.srcObject = stream
         if (start) { this.element.play() }
-        draw()
     }
 
+    /** Play the video */
     play() {
         this.element.play()
     }
 
+    /** Pause the video */
     pause() {
         this.element.pause()
     }
