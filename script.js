@@ -4,11 +4,11 @@
 //  LIBRARY
 //  =======
 
-import * as CONSTANTS from "./js/constants.js"
-import { Video } from "./js/Video.js"
-import { Canvas } from "./js/Canvas.js"
-import "./js/toggleTheme.js"
-import { Renderer } from "./js/Renderer.js"
+import * as CONSTANTS from "./modules/constants.js"
+import { Video } from "./modules/Video.js"
+import { Canvas } from "./modules/Canvas.js"
+import "./modules/toggleTheme.js"
+import { Renderer } from "./modules/Renderer.js"
 
 //  VIDEO
 const video = new Video(CONSTANTS.VIDEO)
