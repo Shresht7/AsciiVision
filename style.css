@@ -19,6 +19,11 @@
     --color-dark: var(--color-black);
     --color-light: var(--color-white);
 
+    /* FONT */
+    /* ---- */
+
+    --font-family: 'Titillium Web', monospace;
+    --font-family-ascii: 'Courier New', Courier, monospace;
 }
 
 /* ========= */
@@ -38,7 +43,7 @@ body {
     min-height: 100vh;
     width: 100vw;
     /* overflow: hidden; */
-    font-family: 'Titillium Web', monospace;
+    font-family: var(--font-family);
 }
 
 body {
@@ -144,7 +149,7 @@ main {
 }
 
 #ascii-video {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-family-ascii);
     font-size: 8px;
     line-height: 8px;
     height: 100%;
