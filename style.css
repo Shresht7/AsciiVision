@@ -24,6 +24,8 @@
 
     --font-family: 'Titillium Web', monospace;
     --font-family-ascii: 'Courier New', Courier, monospace;
+
+    --font-size-ascii: 8px;
 }
 
 /* ========= */
@@ -46,23 +48,9 @@ body {
     font-family: var(--font-family);
 }
 
-body {
-    position: relative;
-    display: grid;
-    place-content: center;
-    background-color: var(--color-light);
-    color: var(--color-black);
-}
-
 .dark-mode {
     --color-light: var(--color-black);
     --color-dark: var(--color-white);
-}
-
-img,
-picture {
-    max-width: 100%;
-    display: block;
 }
 
 input,
@@ -102,13 +90,24 @@ button {
 /* LAYOUT */
 /* ====== */
 
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
 main {
+    width: 100%;
+    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
-    width: 100vw;
     padding: 1rem 1rem;
 }
 
@@ -126,7 +125,7 @@ main {
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    padding: 5rem;
+    padding: 2.5rem;
 }
 
 #control-panel * {
@@ -149,11 +148,11 @@ main {
 }
 
 #ascii-video {
-    font-family: var(--font-family-ascii);
-    font-size: 8px;
-    line-height: 8px;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    font-family: var(--font-family-ascii);
+    font-size: var(--font-size-ascii);
+    line-height: var(--font-size-ascii);
 }
 
 #video {
