@@ -28,4 +28,6 @@ export const ID = {
 
     /** Toggle Theme Button */
     TOGGLE_THEME: 'toggle-theme',
+    /** Dark-Mode class name */
+    DARK_MODE: 'dark-mode',
 }
