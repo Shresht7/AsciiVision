@@ -113,12 +113,20 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 5rem;
 }
 
-#control-panel>* {
+#control-panel * {
     width: 100%;
+}
+
+#control-panel>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #ascii-video-container {

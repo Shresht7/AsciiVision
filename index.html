@@ -27,13 +27,22 @@
 
     <main>
 
+        <!-- This section houses the controls that change the parameters of the ascii output -->
         <section id="control-panel">
             <h2>Control Panel</h2>
-            <label for="sensitivity-slider">Sensitivity</label>
-            <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="25" value="12" />
-            <button type="button" id="toggle-camera">Toggle Camera</button>
-            <button type="button" id="start">Start</button>
-            <button type="button" id="stop">Stop</button>
+            <div>
+                <label for="sensitivity-slider">Sensitivity</label>
+                <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="25" value="12" />
+            </div>
+
+            <div>
+                <button type="button" id="toggle-camera">Toggle Camera</button>
+            </div>
+
+            <div>
+                <button type="button" id="start">Start</button>
+                <button type="button" id="stop">Stop</button>
+            </div>
         </section>
 
         <div id="ascii-video-container">
