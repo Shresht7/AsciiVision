@@ -1,11 +1,13 @@
+// @ts-check
+
+//  Library
 import { TOGGLE_THEME, DARK_MODE } from './constants.js'
 
 //  ============
 //  TOGGLE THEME
 //  ============
 
-/** @type HTMLButtonElement */
-const toggleThemeButton = document.getElementById(TOGGLE_THEME)
+const toggleThemeButton = /** @type HTMLButtonElement */ (document.getElementById(TOGGLE_THEME))
 
 /** Select the appropriate emoji based on the current theme */
 const getToggleThemeText = () => document.body.classList.contains(DARK_MODE) ? '🌞' : '🌙'
