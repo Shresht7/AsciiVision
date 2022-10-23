@@ -2,32 +2,8 @@
 //  LIBRARY
 //  =======
 
+import { WIDTH, HEIGHT, ID } from "./js/constants.js"
 import "./js/toggleTheme.js"
-
-//  =========
-//  CONSTANTS
-//  =========
-
-const WIDTH = 120
-const HEIGHT = 90
-
-/** Map of Element IDs */
-const ID = {
-    /** Video element to capture user media from */
-    VIDEO: 'video',
-    /** Canvas associated with the user-media video element used to obtain pixel data */
-    VIDEO_CANVAS: 'video-canvas',
-    /** Control panel button to toggle between cameras */
-    CTRL_TOGGLE_CAMERA: 'toggle-camera',
-    /** Control panel button to start the video capture */
-    CTRL_START: 'start',
-    /** Control panel button to stop the video capture */
-    CTRL_STOP: 'stop',
-    /** Control panel slider that controls the brightness threshold value */
-    CTRL_SENSITIVITY_SLIDER: 'sensitivity-slider',
-    /** Output Ascii Video Element */
-    ASCII_VIDEO: 'ascii-video',
-}
 
 // =====
 // VIDEO

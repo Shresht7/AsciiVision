@@ -1,5 +1,11 @@
+import { ID } from 'constants.js'
+
+//  ============
+//  TOGGLE THEME
+//  ============
+
 /** @type HTMLButtonElement */
-const toggleThemeButton = document.getElementById('toggle-theme')
+const toggleThemeButton = document.getElementById(ID.TOGGLE_THEME)
 
 toggleThemeButton.innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌙'
 
