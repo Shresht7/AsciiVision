@@ -9,48 +9,61 @@ import "./js/toggleTheme.js"
 // VIDEO
 // =====
 
-/** @type HTMLVideoElement */
-const video = document.getElementById(CONSTANTS.VIDEO)
+class Video {
 
-let facingMode = 'user'
-const toggleFacingMode = () => {
-    facingMode = facingMode === 'user' ? 'environment' : 'user'
-    captureVideoStream(video)
+    /** @type HTMLVideoElement */
+    element
+    facingMode = 'user'
+    isPlaying = false;
+
+    constructor(id, facingMode = 'user') {
+        this.element = document.getElementById(id)
+        this.facingMode = facingMode
+    }
+
+    /** Toggle Camera Facing-Mode between 'user' and 'environment' */
+    toggleFacingMode() {
+        this.facingMode === 'user' ? 'environment' : 'user'
+        if (this.isPlaying) { this.captureStream() }
+    }
+
+    /**
+     * Capture the video stream using the navigator's mediaDevices api
+     * @param {boolean} start Start the video stream automatically
+     */
+    async captureStream(start = true) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                width: CONSTANTS.WIDTH,
+                height: CONSTANTS.HEIGHT,
+                facingMode: this.facingMode,
+            },
+            audio: false
+        })
+        this.element.srcObject = stream
+        if (start) { this.element.play() }
+        draw()
+    }
+
+    play() {
+        this.element.play()
+    }
+
+    pause() {
+        this.element.pause()
+    }
+
 }
 
-const toggleCameraButton = document.getElementById(CONSTANTS.CTRL_TOGGLE_CAMERA)
-toggleCameraButton.addEventListener('click', toggleFacingMode)
+const video = new Video(CONSTANTS.VIDEO)
 
-/**
- * Capture the video stream using the navigator's mediaDevices api
- * @param {HTMLVideoElement} video Video element to play the stream
- * @param {boolean} start Start the video stream
- */
-async function captureVideoStream(video, start = true) {
-    const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-            width: CONSTANTS.WIDTH,
-            height: CONSTANTS.HEIGHT,
-            facingMode
-        },
-        audio: false,
-    })
-    video.srcObject = stream
-    if (start) { video.play() }
-    draw()
-}
-
-//  ======
-//  CANVAS
-//  ======
-
-/** @type HTMLCanvasElement */
-const videoCanvas = document.getElementById(CONSTANTS.VIDEO_CANVAS)
-const videoCanvasCtx = videoCanvas.getContext('2d')
 
 //  ========
 //  CONTROLS
 //  ========
+
+const toggleCameraButton = document.getElementById(CONSTANTS.CTRL_TOGGLE_CAMERA)
+toggleCameraButton.addEventListener('click', video.toggleFacingMode)
 
 /** @type HTMLButtonElement */
 const startBtn = document.getElementById(CONSTANTS.CTRL_START)
@@ -58,72 +71,82 @@ const startBtn = document.getElementById(CONSTANTS.CTRL_START)
 const stopBtn = document.getElementById(CONSTANTS.CTRL_STOP)
 
 startBtn.addEventListener('click', () => {
-    captureVideoStream(video)
+    video.captureStream()
 })
 
 stopBtn.addEventListener('click', () => {
     video.pause()
 })
 
-//  =======
-//  HELPERS
-//  =======
+//  ======
+//  CANVAS
+//  ======
 
-/**
- * The Canvas context to clear
- * @param {CanvasRenderingContext2D} ctx Canvas context
- * @param {number} width height to clear
- * @param {number} height width to clear
- */
-function clearCanvas(ctx, width = CONSTANTS.WIDTH, height = CONSTANTS.HEIGHT) {
-    ctx.fillStyle = "#FFFFFF"
-    ctx.fillRect(0, 0, width, height)
-}
+class Canvas {
 
-/**
- * Render the canvas
- * @param {HTMLCanvasElement} canvas Canvas
- * @param {CanvasRenderingContext2D} ctx Canvas context
- * @param {CanvasImageSource} image Image source
- * @param {number} ctx width
- * @param {number} ctx height
- */
-function renderCanvas(canvas, ctx, image, width = CONSTANTS.WIDTH, height = CONSTANTS.HEIGHT) {
-    if (!width || !height) { return clearCanvas(ctx) }
-    canvas.width = width
-    canvas.height = height
-    ctx.drawImage(image, 0, 0, width, height)
-}
+    /** @type HTMLCanvasElement */
+    element
+    /** @type CanvasRenderingContext2D */
+    ctx
 
-/**
- * Get Pixel Array Data
- * @param {HTMLCanvasElement} canvas Canvas
- * @param {CanvasRenderingContext2D} ctx Canvas context
- */
-function getPixelData(canvas, ctx) {
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    const data = imageData.data
-
-    const res = []
-    let row = 0, column = 0
-    for (let i = 0; i < data.length; i += 4) {
-        if (!res[row]) { res[row] = new Array(canvas.width) }
-        const r = data[i + 0]
-        const g = data[i + 1]
-        const b = data[i + 2]
-        const a = data[i + 3]
-        res[row][column] = [r, g, b, a]
-        if (column < canvas.width) {
-            column++
-        }
-        if (column === canvas.width) {
-            column = 0
-            row += 1
-        }
-
+    constructor(id) {
+        this.element = document.getElementById(id)
+        this.ctx = this.element.getContext('2d')
     }
-    return res
+
+    /**
+     * Clears the canvas
+     * @param {number} width Width to clear
+     * @param {number} height Height to clear
+     */
+    clear(width = CONSTANTS.WIDTH, height = CONSTANTS.HEIGHT) {
+        this.ctx.fillStyle = '#FFFFFF'
+        this.ctx.fillRect(0, 0, width, height)
+    }
+
+    /**
+     * Renders the image on the canvas
+     * @param {CanvasImageSource} image Image Source
+     * @param {number} width Width to render
+     * @param {number} height Height to render
+     */
+    render(image, width = CONSTANTS.WIDTH, height = CONSTANTS.HEIGHT) {
+        if (!width || !height) { return this.clear() }
+        this.element.width = width
+        this.element.height = height
+        this.ctx.drawImage(image, 0, 0, width, height)
+    }
+
+    /**
+     * Returns pixel data from the canvas
+     * @returns Pixel Data Array
+     */
+    getPixelData() {
+        const imageData = this.ctx.getImageData(0, 0, this.element.width, this.element.height)
+        const data = imageData.data
+
+        const res = []
+        for (let i = 0; i < data.length; i += 4) {
+            if (!res[row]) { res[row] = new Array(this.element.width) }
+            const r = data[i + 0]
+            const g = data[i + 1]
+            const b = data[i + 2]
+            const a = data[i + 3]
+            res[row][column] = [r, g, b, a]
+            if (column < this.element.width) {
+                column++
+            }
+            if (column === this.element.width) {
+                column = 0
+                row++
+            }
+        }
+        return res
+    }
+
 }
+
+const canvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 
 //  =====
 //  ASCII
@@ -166,9 +189,9 @@ const textElement = document.getElementById(CONSTANTS.ASCII_VIDEO)
 //  ====
 
 function draw() {
-    if (video.paused) { return }
-    renderCanvas(videoCanvas, videoCanvasCtx, video)
-    const data = getPixelData(videoCanvas, videoCanvasCtx)
+    if (video.element.paused) { return }
+    canvas.render(video.element)
+    const data = canvas.getPixelData()
     renderText(textElement, data)
     requestAnimationFrame(draw)
 }
