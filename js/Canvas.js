@@ -16,7 +16,7 @@ export class Canvas {
 
     constructor(id) {
         this.element = /** @type HTMLCanvasElement */ (document.getElementById(id))
-        this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d'))
+        this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d', { willReadFrequently: true }))
     }
 
     /**
