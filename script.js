@@ -49,8 +49,8 @@ toggleCameraBtn.addEventListener('click', video.toggleFacingMode)
 // ------------
 
 const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
-startBtn.addEventListener('click', () => {
-    video.captureStream()
+startBtn.addEventListener('click', async () => {
+    await video.captureStream()
     draw()
 })
 
@@ -65,7 +65,7 @@ stopBtn.addEventListener('click', () => video.pause())
 //  ====
 
 function draw() {
-    if (!video.isPlaying) { return }
+    if (video.element.paused) { return }
     canvas.render(video.element)
     renderer.renderHTML(textElement, canvas.getPixelData())
     requestAnimationFrame(draw)

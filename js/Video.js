@@ -16,11 +16,6 @@ export class Video {
     /** @type {'user' | 'environment'} */
     facingMode = 'user'
 
-    /** @type boolean */
-    get isPlaying() {
-        return !this.element.paused
-    }
-
     /**
      * @param {string} id ID of the video element get user media stream from
      * @param {'user' | 'environment'} facingMode Camera facing mode 
@@ -33,7 +28,7 @@ export class Video {
     /** Toggle Camera Facing-Mode between 'user' and 'environment' */
     toggleFacingMode() {
         this.facingMode === 'user' ? 'environment' : 'user'
-        if (this.isPlaying) { this.captureStream() }
+        if (!this.element.paused) { this.captureStream() }
     }
 
     /**
