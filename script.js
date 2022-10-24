@@ -14,15 +14,16 @@ import { Renderer } from "./modules/Renderer.js"
 const video = new Video(CONSTANTS.VIDEO)
 
 //  CANVAS
-const canvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
+const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 
 //  =====
 //  ASCII
 //  =====
 
-const renderer = new Renderer()
 
-const textElement = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
+const text = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
+const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
+const renderer = new Renderer({ text, canvas })
 
 // ========
 // CONTROLS
@@ -66,7 +67,8 @@ stopBtn.addEventListener('click', () => video.pause())
 
 function draw() {
     if (video.element.paused) { return }
-    canvas.render(video.element)
-    renderer.renderHTML(textElement, canvas.getPixelData())
+    videoCanvas.render(video.element)
+    // renderer.renderHTML(canvas.getPixelData())
+    renderer.renderCanvas(videoCanvas.getPixelData())
     requestAnimationFrame(draw)
 }
