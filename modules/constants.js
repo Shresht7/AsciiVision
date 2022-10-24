@@ -25,6 +25,7 @@ export const CTRL_SENSITIVITY_SLIDER = 'sensitivity-slider'
 
 /** Output ASCII Video Element */
 export const ASCII_VIDEO = 'ascii-video'
+export const ASCII_CANVAS = 'ascii-canvas'
 
 /** Toggle Theme Button */
 export const TOGGLE_THEME = 'toggle-theme'
