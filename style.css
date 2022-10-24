@@ -100,6 +100,15 @@ body {
     color: var(--color-dark);
 }
 
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 0.5rem;
+}
+
 main {
     width: 100%;
     flex: 1;
@@ -145,6 +154,7 @@ main {
     display: grid;
     place-content: center;
     overflow: hidden;
+    position: relative;
 }
 
 #ascii-video {
@@ -155,10 +165,10 @@ main {
     line-height: var(--font-size-ascii);
 }
 
-#video {
+aside #video {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 0;
+    top: 0;
     border-radius: 0.5rem;
 }
 
