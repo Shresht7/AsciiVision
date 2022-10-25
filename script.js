@@ -4,29 +4,58 @@
 //  LIBRARY
 //  =======
 
-import * as CONSTANTS from "./js/constants.js"
-import { Video } from "./js/Video.js"
-import { Canvas } from "./js/Canvas.js"
-import "./js/toggleTheme.js"
-import { Renderer } from "./js/Renderer.js"
+import * as CONSTANTS from "./modules/constants.js"
+import { Video } from "./modules/Video.js"
+import { Canvas } from "./modules/Canvas.js"
+import "./modules/toggleTheme.js"
+import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
 
 //  VIDEO
 const video = new Video(CONSTANTS.VIDEO)
 
 //  CANVAS
-const canvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
+const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 
 //  =====
 //  ASCII
 //  =====
 
-const renderer = new Renderer()
 
-const textElement = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
+const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
+const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
+// const renderer = new HTMLRenderer(html)
+/** @type {Renderer} */
+let renderer = new CanvasRenderer(canvas)
+
+/**
+ * Select the Renderer
+ * @param {'canvas' | 'html' | 'text'} option Renderer Modes
+ */
+function selectRenderer(option) {
+    if (renderer.type === option) { return }
+    renderer.clean()
+    switch (option) {
+        case 'canvas': renderer = new CanvasRenderer(canvas); break;
+        case 'html': renderer = new HTMLRenderer(html); break;
+        case 'text': renderer = new HTMLRenderer(html); break;
+        default: renderer = new CanvasRenderer(canvas);
+    }
+}
 
 // ========
 // CONTROLS
 // ========
+
+//  RENDERER SELECT
+//  ---------------
+
+const rendererSelection = /** @type HTMLSelectElement */ (document.getElementById(CONSTANTS.CTRL_RENDERER_SELECT))
+
+rendererSelection.addEventListener('input', (e) => {
+    const target = /** @type HTMLSelectElement */ (e.target)
+    const value = /** @type { 'canvas' | 'html' | 'text' } */ (target.value)
+    selectRenderer(value)
+})
 
 // SENSITIVITY SLIDER
 // ------------------
@@ -66,7 +95,7 @@ stopBtn.addEventListener('click', () => video.pause())
 
 function draw() {
     if (video.element.paused) { return }
-    canvas.render(video.element)
-    renderer.renderHTML(textElement, canvas.getPixelData())
+    videoCanvas.render(video.element)
+    renderer.render(videoCanvas.getPixelData())
     requestAnimationFrame(draw)
 }

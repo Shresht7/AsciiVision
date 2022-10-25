@@ -22,9 +22,12 @@ export const CTRL_START = 'start'
 export const CTRL_STOP = 'stop'
 /** Control panel slider that controls the brightness threshold value */
 export const CTRL_SENSITIVITY_SLIDER = 'sensitivity-slider'
+/** Control panel select that selects the renderer mode */
+export const CTRL_RENDERER_SELECT = 'renderer-select'
 
 /** Output ASCII Video Element */
 export const ASCII_VIDEO = 'ascii-video'
+export const ASCII_CANVAS = 'ascii-canvas'
 
 /** Toggle Theme Button */
 export const TOGGLE_THEME = 'toggle-theme'

@@ -23,6 +23,7 @@
 
     <header>
         <h1>AsciiVision</h1>
+        <button type="button" id="toggle-theme">🌙</button>
     </header>
 
     <main>
@@ -30,6 +31,16 @@
         <!-- This section houses the controls that change the parameters of the ascii output -->
         <section id="control-panel">
             <h2>Control Panel</h2>
+
+            <div>
+                <label for="renderer-select">Renderer</label>
+                <select id="renderer-select" name="renderer-select">
+                    <option value="canvas">Canvas</option>
+                    <option value="html">HTML</option>
+                    <option value="text">Text</option>
+                </select>
+            </div>
+
             <div>
                 <label for="sensitivity-slider">Sensitivity</label>
                 <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="25" value="12" />
@@ -46,18 +57,20 @@
         </section>
 
         <div id="ascii-video-container">
+            <!-- TODO: #7 Add Welcome Text and Instructions -->
             <div id="ascii-video"></div>
+            <canvas id="ascii-canvas"></canvas>
+
+            <aside>
+                <video id="video">Video Steam Unavailable</video>
+                <canvas id="video-canvas" class="display-none"></canvas>
+            </aside>
         </div>
 
     </main>
 
-    <aside>
-        <video id="video">Video Steam Unavailable</video>
-        <canvas id="video-canvas"></canvas>
-    </aside>
-
     <footer>
-        <button type="button" id="toggle-theme">🌙</button>
+        <!-- TODO: #9 Add Footer Information -->
     </footer>
 
 </body>
