@@ -4,6 +4,7 @@
 //  CONSTANTS
 //  =========
 
+// TODO: #22 Adjustable Width and Height Settings
 /** Desired width of the ASCII output */
 export const WIDTH = 120
 /** Desired height of the ASCII output */
