@@ -23,6 +23,7 @@ export class Renderer {
      */
     constructor(CHARSET = DEFAULT_CHARSET) {
         this.CHARSET = CHARSET
+        this.type = 'text'
     }
 
     /**
@@ -59,6 +60,10 @@ export class Renderer {
         }
         return text
     }
+
+    render(data) { }
+
+    clean() { }
 }
 
 export class HTMLRenderer extends Renderer {
@@ -70,6 +75,7 @@ export class HTMLRenderer extends Renderer {
     constructor(element, CHARSET = DEFAULT_CHARSET) {
         super(CHARSET)
         this.element = /** @type HTMLElement */ (element)
+        this.type = 'html'
     }
 
     /**
@@ -101,6 +107,12 @@ export class HTMLRenderer extends Renderer {
         this.element.innerHTML = this.transform(data)
     }
 
+    clean() {
+        while (this.element.firstChild) {
+            this.element.removeChild(this.element.firstChild)
+        }
+    }
+
 }
 
 export class CanvasRenderer extends Renderer {
@@ -116,6 +128,7 @@ export class CanvasRenderer extends Renderer {
         this.element.width = WIDTH * this.scale
         this.element.height = HEIGHT * this.scale
         this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d'))
+        this.type = 'canvas'
     }
 
     /**
@@ -145,6 +158,14 @@ export class CanvasRenderer extends Renderer {
                 this.ctx.fillText(character, column * this.scale, row * this.scale)
 
             }
+        }
+    }
+
+    clean() {
+        this.element.width = 0
+        this.element.height = 0
+        while (this.element.firstChild) {
+            this.element.removeChild(this.element.firstChild)
         }
     }
 

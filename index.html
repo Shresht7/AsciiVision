@@ -31,6 +31,16 @@
         <!-- This section houses the controls that change the parameters of the ascii output -->
         <section id="control-panel">
             <h2>Control Panel</h2>
+
+            <div>
+                <label for="renderer-select">Renderer</label>
+                <select id="renderer-select" name="renderer-select">
+                    <option value="canvas">Canvas</option>
+                    <option value="html">HTML</option>
+                    <option value="text">Text</option>
+                </select>
+            </div>
+
             <div>
                 <label for="sensitivity-slider">Sensitivity</label>
                 <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="25" value="12" />

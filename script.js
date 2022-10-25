@@ -24,11 +24,38 @@ const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
 const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
 // const renderer = new HTMLRenderer(html)
-const renderer = new CanvasRenderer(canvas)
+/** @type {Renderer} */
+let renderer = new CanvasRenderer(canvas)
+
+/**
+ * Select the Renderer
+ * @param {'canvas' | 'html' | 'text'} option Renderer Modes
+ */
+function selectRenderer(option) {
+    if (renderer.type === option) { return }
+    renderer.clean()
+    switch (option) {
+        case 'canvas': renderer = new CanvasRenderer(canvas); break;
+        case 'html': renderer = new HTMLRenderer(html); break;
+        case 'text': renderer = new HTMLRenderer(html); break;
+        default: renderer = new CanvasRenderer(canvas);
+    }
+}
 
 // ========
 // CONTROLS
 // ========
+
+//  RENDERER SELECT
+//  ---------------
+
+const rendererSelection = /** @type HTMLSelectElement */ (document.getElementById(CONSTANTS.CTRL_RENDERER_SELECT))
+
+rendererSelection.addEventListener('input', (e) => {
+    const target = /** @type HTMLSelectElement */ (e.target)
+    const value = /** @type { 'canvas' | 'html' | 'text' } */ (target.value)
+    selectRenderer(value)
+})
 
 // SENSITIVITY SLIDER
 // ------------------
