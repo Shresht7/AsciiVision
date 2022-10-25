@@ -1,33 +1,32 @@
 //@ts-check
 
+//  Library
 import { HEIGHT, WIDTH } from "./constants.js"
+
+//  Type Definitions
+/** @typedef {[number, number, number, number]} PixelData */
 
 //  ========
 //  RENDERER
 //  ========
 
+/** Characters to use to draw pixels */
 const DEFAULT_CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._ "
 // const DEFAULT_CHARSET = '       .:-i|=+%O#@'
 // const DEFAULT_CHARSET = '        .:░▒▓█';
+// TODO: #15 Add Option to Customize CHARSET
 
 export class Renderer {
 
-    constructor({ text, canvas }, CHARSET = DEFAULT_CHARSET) {
-        if (text) {
-            this.element = /** @type HTMLElement */ (text)
-        }
-        if (canvas) {
-            this.scale = 8
-            this.canvas = /** @type HTMLCanvasElement */ (canvas)
-            this.canvas.width = WIDTH * this.scale
-            this.canvas.height = HEIGHT * this.scale
-            this.ctx = /** @type CanvasRenderingContext2D */ (this.canvas.getContext('2d'))
-        }
+    /**
+     * @param {string} CHARSET Character-Set to use to draw pixels
+     */
+    constructor(CHARSET = DEFAULT_CHARSET) {
         this.CHARSET = CHARSET
     }
 
     /**
-     * Update the character set
+     * Update the character-set
      * @param {(charset: string) => string} cb Callback function to transform the charset
      */
     updateCharset(cb) {
@@ -35,7 +34,7 @@ export class Renderer {
     }
 
     /**
-     * Get Character from the Character set that corresponds to the given value in the range
+     * Get character from the character-set that corresponds to the given value in the range
      * @param {number} val Value to map character to
      */
     getChar(val) {
@@ -43,44 +42,108 @@ export class Renderer {
         return this.CHARSET[value]
     }
 
-    /** @typedef {[number, number, number, number]} PixelDataTuple */
+    /**
+     * Returns the ASCII image based on the given pixel data array
+     * @param {PixelData[][]} data Pixel Data 2D Array
+     * @returns Rendered Text
+     */
+    transform(data) {
+        let text = ''
+        for (const row of data) {
+            for (const entry of row) {
+                const [r, g, b, a] = entry
+                const average = (r + g + b) / 3
+                text += this.getChar(average)
+            }
+            text += '\n'
+        }
+        return text
+    }
+}
+
+export class HTMLRenderer extends Renderer {
 
     /**
-     * Renders ASCII image based on the given pixel data array
-     * @param {PixelDataTuple[][]} data Pixel Data 2D Array
+     * @param {HTMLElement} element HTMLElement to render the ASCII image to
+     * @param {string} CHARSET Character-Set to use to draw pixels
      */
-    renderHTML(data) {
-        if (!this.element) { throw new Error('Failed to initialize text element!') }
+    constructor(element, CHARSET = DEFAULT_CHARSET) {
+        super(CHARSET)
+        this.element = /** @type HTMLElement */ (element)
+    }
+
+    /**
+     * Returns the ASCII image based on the given pixel data array
+     * @param {PixelData[][]} data Pixel Data 2D Array
+     * @returns Rendered HTML
+     */
+    transform(data) {
         let html = '<div>'
         for (const row of data) {
             for (const entry of row) {
                 const [r, g, b, a] = entry
                 const average = (r + g + b) / 3
                 let character = this.getChar(average)
-                character === ' ' ? "&nbsp;" : character
-                html += this.getChar(average)
+                character === ' ' ? '&nbsp;' : character
+                html += character
             }
             html += '<br />'
         }
         html += '</div>'
-        this.element.innerHTML = html
+        return html
     }
 
     /**
-     * Renders ASCII image based on the given pixel data
-     * @param {PixelDataTuple[][]} data Pixel Data 2D Array
+     * Renders the ASCII image to the HTMLElement based on the given pixel data array
+     * @param {PixelData[][]} data Pixel Data 2D Array
      */
-    renderCanvas(data) {
-        if (!this.canvas || !this.ctx || !this.scale) { throw new Error('Failed to initialize canvas and context!') }
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    render(data) {
+        this.element.innerHTML = this.transform(data)
+    }
+
+}
+
+export class CanvasRenderer extends Renderer {
+
+    /**
+     * @param {HTMLCanvasElement} element HTMLCanvasElement to draw the ASCII image to
+     * @param {string} CHARSET Character-Set to use to draw pixels
+     */
+    constructor(element, CHARSET = DEFAULT_CHARSET) {
+        super(CHARSET)
+        this.element = /** @type HTMLCanvasElement */ (element)
+        this.scale = 8
+        this.element.width = WIDTH * this.scale
+        this.element.height = HEIGHT * this.scale
+        this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d'))
+    }
+
+    /**
+ * Renders ASCII image based on the given pixel data
+ * @param {PixelData[][]} data Pixel Data 2D Array
+ */
+    render(data) {
+        //  Clear the canvas
+        this.ctx.clearRect(0, 0, this.element.width, this.element.height)
+
+        //  Iterate over the pixel data array
         for (let row = 0; row < data.length; row++) {
             for (let column = 0; column < data[row].length; column++) {
+
+                //  Skip undefined entries // ? Is this actually needed?
                 if (!data[row][column]) { continue }
+
+                //  Extract RGBA values from entry
                 const [r, g, b, a] = data[row][column]
+
+                //  Determine Character
                 const average = (r + g + b) / 3
                 const character = this.getChar(average)
-                this.ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`
+
+                //  Render to Canvas
+                this.ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`     // TODO: #16 Add Option to toggle Color on and off
                 this.ctx.fillText(character, column * this.scale, row * this.scale)
+
             }
         }
     }

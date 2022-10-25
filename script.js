@@ -8,7 +8,7 @@ import * as CONSTANTS from "./modules/constants.js"
 import { Video } from "./modules/Video.js"
 import { Canvas } from "./modules/Canvas.js"
 import "./modules/toggleTheme.js"
-import { Renderer } from "./modules/Renderer.js"
+import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
 
 //  VIDEO
 const video = new Video(CONSTANTS.VIDEO)
@@ -21,9 +21,10 @@ const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 //  =====
 
 
-const text = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
+const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
 const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
-const renderer = new Renderer({ text, canvas })
+// const renderer = new HTMLRenderer(html)
+const renderer = new CanvasRenderer(canvas)
 
 // ========
 // CONTROLS
@@ -68,7 +69,6 @@ stopBtn.addEventListener('click', () => video.pause())
 function draw() {
     if (video.element.paused) { return }
     videoCanvas.render(video.element)
-    // renderer.renderHTML(canvas.getPixelData())
-    renderer.renderCanvas(videoCanvas.getPixelData())
+    renderer.render(videoCanvas.getPixelData())
     requestAnimationFrame(draw)
 }
