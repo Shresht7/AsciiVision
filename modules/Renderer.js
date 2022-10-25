@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH } from "./constants.js"
+import { HEIGHT, WIDTH, ASCII_VIDEO, ASCII_CANVAS } from "./constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */

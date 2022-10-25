@@ -29,6 +29,8 @@ export const CTRL_RENDERER_SELECT = 'renderer-select'
 export const ASCII_VIDEO = 'ascii-video'
 export const ASCII_CANVAS = 'ascii-canvas'
 
+/** Clear Screen Button */
+export const CLEAR_SCREEN = 'clear-screen'
 /** Toggle Theme Button */
 export const TOGGLE_THEME = 'toggle-theme'
 /** Dark-Mode class name */

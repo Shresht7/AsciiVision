@@ -7,13 +7,13 @@
 import * as CONSTANTS from "./modules/constants.js"
 import { Video } from "./modules/Video.js"
 import { Canvas } from "./modules/Canvas.js"
-import "./modules/toggleTheme.js"
 import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
 
+//  =====
 //  VIDEO
-const video = new Video(CONSTANTS.VIDEO)
+//  =====
 
-//  CANVAS
+const video = new Video(CONSTANTS.VIDEO)
 const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 
 //  =====
@@ -23,7 +23,7 @@ const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
 
 const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
 const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
-// const renderer = new HTMLRenderer(html)
+
 /** @type {Renderer} */
 let renderer = new CanvasRenderer(canvas)
 
@@ -31,7 +31,7 @@ let renderer = new CanvasRenderer(canvas)
  * Select the Renderer
  * @param {'canvas' | 'html' | 'text'} option Renderer Modes
  */
-function selectRenderer(option) {
+export function selectRenderer(option) {
     if (renderer.type === option) { return }
     renderer.clean()
     switch (option) {
@@ -40,6 +40,17 @@ function selectRenderer(option) {
         case 'text': renderer = new HTMLRenderer(html); break;
         default: renderer = new CanvasRenderer(canvas);
     }
+}
+
+//  ====
+//  DRAW
+//  ====
+
+function draw() {
+    if (video.element.paused) { return }
+    videoCanvas.render(video.element)
+    renderer.render(videoCanvas.getPixelData())
+    requestAnimationFrame(draw)
 }
 
 // ========
@@ -72,7 +83,7 @@ slider.addEventListener('input', (e) => {
 // --------------------
 
 const toggleCameraBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_TOGGLE_CAMERA))
-toggleCameraBtn.addEventListener('click', video.toggleFacingMode)
+toggleCameraBtn.addEventListener('click', () => video.toggleFacingMode)
 
 // START BUTTON
 // ------------
@@ -89,13 +100,26 @@ startBtn.addEventListener('click', async () => {
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 stopBtn.addEventListener('click', () => video.pause())
 
-//  ====
-//  DRAW
-//  ====
+// CLEAR CANVAS BUTTON
+// -------------------
 
-function draw() {
-    if (video.element.paused) { return }
-    videoCanvas.render(video.element)
-    renderer.render(videoCanvas.getPixelData())
-    requestAnimationFrame(draw)
-}
+const clearScreenButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.CLEAR_SCREEN))
+
+clearScreenButton.addEventListener('click', () => renderer.clean())
+
+//  TOGGLE THEME BUTTON
+//  -------------------
+
+const toggleThemeButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_THEME))
+
+/** Select the appropriate emoji based on the current theme */
+const getToggleThemeText = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌞' : '🌙'
+
+//  Initialize toggleThemeButton innerText
+toggleThemeButton.innerText = getToggleThemeText()
+
+//  Toggle the DARK_MODE class on the body and update the toggleThemeButton's innerText
+toggleThemeButton.addEventListener('click', () => {
+    document.body.classList.toggle(CONSTANTS.DARK_MODE)
+    toggleThemeButton.innerText = getToggleThemeText()
+})
