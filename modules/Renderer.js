@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH, SCREENSHOT } from "./constants.js"
+import { HEIGHT, WIDTH } from "./constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
@@ -61,6 +61,9 @@ export class Renderer {
         return text
     }
 
+    /** Setup to perform when starting the renderer */
+    setup() { }
+
     /**
      * Renders the ASCII output
      * @param {PixelData[][]} data Pixel Data 2D Array
@@ -70,7 +73,7 @@ export class Renderer {
     /** Returns a snapshot of the ASCII image */
     snapshot() { return '' }
 
-    /** Clears the screen */
+    /** Cleanup to perform after the renderer stops */
     clean() { }
 }
 
@@ -122,6 +125,7 @@ export class HTMLRenderer extends Renderer {
         return this.element.innerText
     }
 
+    /** Cleanup the renderer */
     clean() {
         while (this.element.firstChild) {
             this.element.removeChild(this.element.firstChild)
@@ -140,10 +144,14 @@ export class CanvasRenderer extends Renderer {
         super(CHARSET)
         this.element = /** @type HTMLCanvasElement */ (element)
         this.scale = 8
-        this.element.width = WIDTH * this.scale
-        this.element.height = HEIGHT * this.scale
         this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d'))
         this.type = 'canvas'
+    }
+
+    /** Setup to perform when the renderer starts */
+    setup() {
+        this.element.width = WIDTH * this.scale
+        this.element.height = HEIGHT * this.scale
     }
 
     /**
@@ -183,7 +191,7 @@ export class CanvasRenderer extends Renderer {
         return this.element.toDataURL()    // TODO: #23 Support Several Screenshot Formats
     }
 
-    /** Clears the screen */
+    /** Cleanup to perform when the renderer stops */
     clean() {
         this.element.width = 0
         this.element.height = 0
