@@ -238,6 +238,7 @@ main {
 }
 
 #ascii-video-container {
+    height: 90vh;
     flex: 3;
     display: grid;
     place-content: center;

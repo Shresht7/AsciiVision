@@ -144,8 +144,8 @@ export class CanvasRenderer extends Renderer {
 
     /** Setup to perform when the renderer starts */
     setup() {
-        this.element.width = WIDTH * this.scale
-        this.element.height = HEIGHT * this.scale
+        this.element.width = this.element.parentElement?.clientWidth || WIDTH * this.scale
+        this.element.height = this.element.parentElement?.clientHeight || HEIGHT * this.scale
     }
 
     /**
