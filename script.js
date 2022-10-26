@@ -103,9 +103,18 @@ stopBtn.addEventListener('click', () => video.pause())
 //  SCREENSHOT BUTTON
 //  -----------------
 
+const download = /** @type HTMLAnchorElement */ (document.getElementById(CONSTANTS.OFFSCREEN_ANCHOR))
+
 const screenshotButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.SCREENSHOT))
 screenshotButton.addEventListener('click', () => {
-    console.log('Screenshot')
+    const snapshot = renderer.snapshot()
+    if (renderer.type === 'canvas') {
+        download.setAttribute('href', snapshot)
+        download.setAttribute('download', 'screenshot.png')
+        download.click()
+    } else if (renderer.type === 'html' || renderer.type === 'text') {
+        navigator.clipboard.writeText(snapshot)
+    }
 })
 
 // CLEAR CANVAS BUTTON

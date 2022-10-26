@@ -38,3 +38,8 @@ export const CLEAR_SCREEN = 'clear-screen'
 export const TOGGLE_THEME = 'toggle-theme'
 /** Dark-Mode class name */
 export const DARK_MODE = 'dark-mode'
+
+/** Offscreen Element */
+export const OFFSCREEN = 'offscreen'
+/** Offscreen Download Anchor */
+export const OFFSCREEN_ANCHOR = 'offscreen-anchor'
