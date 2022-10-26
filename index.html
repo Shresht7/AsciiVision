@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- METADATA -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,10 @@
     <!-- TODO: #3 Add Favicon -->
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
 
+    <!-- STYLESHEET -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- SCRIPTS -->
     <script src="script.js" type="module" defer></script>
 
     <title>AsciiVision</title>
@@ -21,6 +24,7 @@
 
 <body>
 
+    <!-- HEADER -->
     <header>
         <h1>AsciiVision</h1>
         <div>
@@ -30,14 +34,17 @@
         </div>
     </header>
 
+    <!-- NOTIFICATIONS -->
     <section id="notifications-area"></section>
 
     <main>
 
+        <!-- CONTROL PANEL -->
         <!-- This section houses the controls that change the parameters of the ascii output -->
         <section id="control-panel">
             <h2>Control Panel</h2>
 
+            <!-- RENDERER SELECT -->
             <div>
                 <label for="renderer-select">Renderer</label>
                 <select id="renderer-select" name="renderer-select">
@@ -47,6 +54,7 @@
                 </select>
             </div>
 
+            <!-- CHARACTER-SET INPUT -->
             <div>
                 <label for="character-set-input">Character Set</label>
                 <input id="character-set-input" name="character-set-input" type="text" list="character-sets" />
@@ -57,26 +65,31 @@
                 </datalist>
             </div>
 
+            <!-- SENSITIVITY SLIDER -->
             <div>
                 <label for="sensitivity-slider">Sensitivity</label>
                 <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="30" value="15" />
             </div>
 
+            <!-- TOGGLE CAMERA BUTTON -->
             <div>
                 <button type="button" id="toggle-camera">Toggle Camera</button>
             </div>
 
+            <!-- START AND STOP BUTTONS -->
             <div>
                 <button type="button" id="start">Start</button>
                 <button type="button" id="stop">Stop</button>
             </div>
         </section>
 
+        <!-- ASCII CONTAINER -->
         <div id="ascii-video-container">
             <!-- TODO: #7 Add Welcome Text and Instructions -->
             <div id="ascii-video"></div>
             <canvas id="ascii-canvas"></canvas>
 
+            <!-- VIDEO STREAM -->
             <aside>
                 <video id="video">Video Steam Unavailable</video>
                 <canvas id="video-canvas" class="display-none"></canvas>
@@ -89,6 +102,7 @@
         <!-- TODO: #9 Add Footer Information -->
     </footer>
 
+    <!-- OFFSCREEN DOWNLOAD ANCHOR LINK -->
     <div id="offscreen">
         <a id="offscreen-anchor" href="_" download="screenshot.png">DOWNLOAD</a>
     </div>
