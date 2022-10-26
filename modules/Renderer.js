@@ -5,19 +5,38 @@ import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "./constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
+/** @typedef {{ CHARSET: string, scale: number, colorMode: boolean }} ConstructorOptions */
 
 //  ========
 //  RENDERER
 //  ========
 
+/**
+ * Default Constructor Options
+ * @type ConstructorOptions
+ */
+const defaultOptions = {
+    CHARSET: DEFAULT_CHARSET,
+    scale: 1,
+    colorMode: false
+}
+
 export class Renderer {
 
     /**
-     * @param {string} CHARSET Character-Set to use to draw pixels
+     * @param {ConstructorOptions} opts Renderer Constructor Options
      */
-    constructor(CHARSET = DEFAULT_CHARSET) {
-        this.CHARSET = CHARSET
+    constructor(opts = defaultOptions) {
+        this.options = opts
         this.type = 'text'
+    }
+
+    /**
+     * Update Renderer Options
+     * @param {Partial<ConstructorOptions>} newOpts New options to apply
+     */
+    updateOptions(newOpts) {
+        this.options = { ...this.options, ...newOpts }
     }
 
     /**
@@ -33,8 +52,8 @@ export class Renderer {
      * @param {number} val Value to map character to
      */
     getChar(val) {
-        const value = Math.floor((val / 255) * (this.CHARSET.length - 1))
-        return this.CHARSET[value]
+        const value = Math.floor((val / 255) * (this.options.CHARSET.length - 1))
+        return this.options.CHARSET[value]
     }
 
     /**
@@ -75,10 +94,10 @@ export class HTMLRenderer extends Renderer {
 
     /**
      * @param {HTMLElement} element HTMLElement to render the ASCII image to
-     * @param {string} CHARSET Character-Set to use to draw pixels
+     * @param {ConstructorOptions} opts Renderer Constructor Options
      */
-    constructor(element, CHARSET = DEFAULT_CHARSET) {
-        super(CHARSET)
+    constructor(element, opts = defaultOptions) {
+        super(opts)
         this.element = /** @type HTMLElement */ (element)
         this.type = 'html'
     }
@@ -132,20 +151,20 @@ export class CanvasRenderer extends Renderer {
 
     /**
      * @param {HTMLCanvasElement} element HTMLCanvasElement to draw the ASCII image to
-     * @param {string} CHARSET Character-Set to use to draw pixels
+     * @param {ConstructorOptions} opts Renderer Constructor Options
      */
-    constructor(element, CHARSET = DEFAULT_CHARSET) {
-        super(CHARSET)
+    constructor(element, opts = defaultOptions) {
+        super(opts)
+        this.updateOptions({ scale: 8 })
         this.element = /** @type HTMLCanvasElement */ (element)
-        this.scale = 8
         this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d'))
         this.type = 'canvas'
     }
 
     /** Setup to perform when the renderer starts */
     setup() {
-        this.element.width = this.element.parentElement?.clientWidth || WIDTH * this.scale
-        this.element.height = this.element.parentElement?.clientHeight || HEIGHT * this.scale
+        this.element.width = this.element.parentElement?.clientWidth || WIDTH * this.options.scale
+        this.element.height = this.element.parentElement?.clientHeight || HEIGHT * this.options.scale
     }
 
     /**
@@ -171,8 +190,10 @@ export class CanvasRenderer extends Renderer {
                 const character = this.getChar(average)
 
                 //  Render to Canvas
-                this.ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`     // TODO: #16 Add Option to toggle Color on and off
-                this.ctx.fillText(character, column * this.scale, row * this.scale)
+                if (this.options.colorMode) {
+                    this.ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`
+                }
+                this.ctx.fillText(character, column * this.options.scale, row * this.options.scale)
 
             }
         }
