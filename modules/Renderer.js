@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH } from "./constants.js"
+import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "./constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
@@ -9,12 +9,6 @@ import { HEIGHT, WIDTH } from "./constants.js"
 //  ========
 //  RENDERER
 //  ========
-
-/** Characters to use to draw pixels */
-const DEFAULT_CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._ "
-// const DEFAULT_CHARSET = '       .:-i|=+%O#@'
-// const DEFAULT_CHARSET = '        .:░▒▓█';
-// TODO: #15 Add Option to Customize CHARSET
 
 export class Renderer {
 
@@ -28,10 +22,10 @@ export class Renderer {
 
     /**
      * Update the character-set
-     * @param {(charset: string) => string} cb Callback function to transform the charset
+     * @param {string | ((charset: string) => string)} cb Callback function to transform the charset
      */
     updateCharset(cb) {
-        this.CHARSET = cb(this.CHARSET)
+        this.CHARSET = typeof cb === 'string' ? cb : cb(this.CHARSET)
     }
 
     /**

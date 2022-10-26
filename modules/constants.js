@@ -26,6 +26,15 @@ export const CTRL_SENSITIVITY_SLIDER = 'sensitivity-slider'
 /** Control panel select that selects the renderer mode */
 export const CTRL_RENDERER_SELECT = 'renderer-select'
 
+
+/** Characters to use to draw pixels */
+export const DEFAULT_CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._ "
+// const DEFAULT_CHARSET = '       .:-i|=+%O#@'
+// const DEFAULT_CHARSET = '        .:░▒▓█';
+
+/** Character Set Input */
+export const CHARACTER_SET_INPUT = 'character-set-input'
+
 /** Output ASCII Video Element */
 export const ASCII_VIDEO = 'ascii-video'
 export const ASCII_CANVAS = 'ascii-canvas'

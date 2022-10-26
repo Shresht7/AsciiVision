@@ -88,16 +88,17 @@ select {
 
 button {
     font-family: inherit;
-    padding: 0.33rem 0.25rem;
-}
-
-select {
-    padding: 0.33rem 0.25rem;
 }
 
 button,
 select {
     cursor: pointer;
+}
+
+button,
+select,
+input {
+    padding: 0.33rem 0.25rem;
 }
 
 input[type="range"] {
