@@ -70,6 +70,17 @@ rendererSelection.addEventListener('input', (e) => {
     showNotification(`📹 Switched to ${value} renderer!`)
 })
 
+//  CHARACTER SET INPUT
+//  -------------------
+
+const characterSetInput = /** @type HTMLInputElement */ (document.getElementById(CONSTANTS.CHARACTER_SET_INPUT))
+
+characterSetInput.placeholder = CONSTANTS.DEFAULT_CHARSET
+characterSetInput.addEventListener('input', (e) => {
+    const target = /** @type HTMLInputElement */ (e.target)
+    renderer.updateCharset(target.value || target.placeholder)
+})
+
 // SENSITIVITY SLIDER
 // ------------------
 
