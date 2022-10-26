@@ -30,6 +30,8 @@ export const CTRL_RENDERER_SELECT = 'renderer-select'
 export const ASCII_VIDEO = 'ascii-video'
 export const ASCII_CANVAS = 'ascii-canvas'
 
+/** Screenshot Button */
+export const SCREENSHOT = 'screenshot'
 /** Clear Screen Button */
 export const CLEAR_SCREEN = 'clear-screen'
 /** Toggle Theme Button */
