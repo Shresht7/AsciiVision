@@ -100,6 +100,14 @@ startBtn.addEventListener('click', async () => {
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 stopBtn.addEventListener('click', () => video.pause())
 
+//  SCREENSHOT BUTTON
+//  -----------------
+
+const screenshotButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.SCREENSHOT))
+screenshotButton.addEventListener('click', () => {
+    console.log('Screenshot')
+})
+
 // CLEAR CANVAS BUTTON
 // -------------------
 
