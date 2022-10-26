@@ -13,6 +13,9 @@ export class Video {
     /** @type HTMLVideoElement */
     element
 
+    /** @type MediaStream | undefined */
+    stream
+
     /** @type {'user' | 'environment'} */
     facingMode = 'user'
 
@@ -36,7 +39,7 @@ export class Video {
      * @param {boolean} start Start the video stream automatically
      */
     async captureStream(start = true) {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        this.stream = await navigator.mediaDevices.getUserMedia({
             video: {
                 width: WIDTH,
                 height: HEIGHT,
@@ -44,7 +47,7 @@ export class Video {
             },
             audio: false
         })
-        this.element.srcObject = stream
+        this.element.srcObject = this.stream
         if (start) { this.element.play() }
     }
 
@@ -56,6 +59,11 @@ export class Video {
     /** Pause the video */
     pause() {
         this.element.pause()
+    }
+
+    /** Stop the video */
+    stop() {
+        this.stream?.getTracks().forEach(track => track.stop())
     }
 
 }

@@ -48,7 +48,7 @@ export function selectRenderer(option) {
 //  ====
 
 function draw() {
-    if (video.element.paused) { return }
+    if (!video.stream?.active) { return }
     videoCanvas.render(video.element)
     renderer.render(videoCanvas.getPixelData())
     requestAnimationFrame(draw)
@@ -112,9 +112,10 @@ toggleCameraBtn.addEventListener('click', () => {
 
 const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
 startBtn.addEventListener('click', async () => {
+    renderer.setup()
     await video.captureStream()
-    showNotification('▶️ Playback started!')
     draw()
+    showNotification('▶️ Playback started!')
 })
 
 // STOP BUTTON
@@ -122,7 +123,7 @@ startBtn.addEventListener('click', async () => {
 
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 stopBtn.addEventListener('click', () => {
-    video.pause()
+    video.stop()
     showNotification('🛑 Playback stopped!')
 })
 
@@ -162,7 +163,7 @@ screenshotButton.addEventListener('click', () => {
 const clearScreenButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.CLEAR_SCREEN))
 
 clearScreenButton.addEventListener('click', () => {
-    if (!video.element.paused) { video.pause() }
+    video.stop()
     renderer.clean()
     showNotification('🖥️ Clear Screen')
 })
