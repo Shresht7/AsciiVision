@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH, ASCII_VIDEO, ASCII_CANVAS } from "./constants.js"
+import { HEIGHT, WIDTH, SCREENSHOT } from "./constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
@@ -61,8 +61,16 @@ export class Renderer {
         return text
     }
 
+    /**
+     * Renders the ASCII output
+     * @param {PixelData[][]} data Pixel Data 2D Array
+     */
     render(data) { }
 
+    /** Returns a snapshot of the ASCII image */
+    snapshot() { return '' }
+
+    /** Clears the screen */
     clean() { }
 }
 
@@ -105,6 +113,13 @@ export class HTMLRenderer extends Renderer {
      */
     render(data) {
         this.element.innerHTML = this.transform(data)
+    }
+
+    /**
+     * @returns ASCII Image as text
+     */
+    snapshot() {
+        return this.element.innerText
     }
 
     clean() {
@@ -161,6 +176,14 @@ export class CanvasRenderer extends Renderer {
         }
     }
 
+    /**
+     * @returns ASCII Image DataURL
+     */
+    snapshot() {
+        return this.element.toDataURL()    // TODO: #23 Support Several Screenshot Formats
+    }
+
+    /** Clears the screen */
     clean() {
         this.element.width = 0
         this.element.height = 0

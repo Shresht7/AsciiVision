@@ -183,3 +183,7 @@ main {
     top: 0;
     border-radius: 0.5rem;
 }
+
+#offscreen {
+    display: none;
+}
