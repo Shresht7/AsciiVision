@@ -163,8 +163,10 @@ export class CanvasRenderer extends Renderer {
 
     /** Setup to perform when the renderer starts */
     setup() {
-        this.element.width = this.element.parentElement?.clientWidth || WIDTH * this.options.scale
-        this.element.height = this.element.parentElement?.clientHeight || HEIGHT * this.options.scale
+        const parentElement = /** @type HTMLElement */ (this.element.parentElement)
+        this.element.width = parentElement?.clientWidth || WIDTH * this.options.scale
+        this.element.height = parentElement?.clientHeight || HEIGHT * this.options.scale
+        this.ctx.fillStyle = window.getComputedStyle(parentElement).getPropertyValue('--color-light')
     }
 
     /**
