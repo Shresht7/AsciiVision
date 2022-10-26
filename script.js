@@ -8,6 +8,7 @@ import * as CONSTANTS from "./modules/constants.js"
 import { Video } from "./modules/Video.js"
 import { Canvas } from "./modules/Canvas.js"
 import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
+import { showNotification } from "./modules/notifications.js"
 
 //  =====
 //  VIDEO
@@ -66,6 +67,7 @@ rendererSelection.addEventListener('input', (e) => {
     const target = /** @type HTMLSelectElement */ (e.target)
     const value = /** @type { 'canvas' | 'html' | 'text' } */ (target.value)
     selectRenderer(value)
+    showNotification(`📹 Switched to ${value} renderer!`)
 })
 
 // SENSITIVITY SLIDER
@@ -73,17 +75,37 @@ rendererSelection.addEventListener('input', (e) => {
 
 const slider = /** @type HTMLInputElement */ (document.getElementById(CONSTANTS.CTRL_SENSITIVITY_SLIDER))
 
+/**
+ * Determines the current percentage
+ * @param {number} value Current value
+ * @param {number} max Maximum value
+ * @param {number} min Minimum value
+ */
+const calculatePercentage = (value, max = 100, min = 0) => Math.round(((value / (max - min)) * 100)) + '%'
+
 slider.addEventListener('input', (e) => {
     const target = /** @type HTMLInputElement  */ (e.target)
     const count = parseInt(target.value) + 1
     renderer.updateCharset((charset) => charset.trimEnd() + ' '.repeat(count))
 })
 
+slider.addEventListener('change', (e) => {
+    const target = /** @type HTMLInputElement */ (e.target)
+    const percentage = calculatePercentage(parseInt(target.value), parseInt(target.max), parseInt(target.min))
+    showNotification(`🔦 Sensitivity changed to ${percentage}`)
+})
+
 // TOGGLE CAMERA BUTTON
 // --------------------
 
 const toggleCameraBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_TOGGLE_CAMERA))
-toggleCameraBtn.addEventListener('click', () => video.toggleFacingMode)
+toggleCameraBtn.addEventListener('click', () => {
+    const previousMode = video.facingMode
+    video.toggleFacingMode()
+    if (video.facingMode !== previousMode) {
+        showNotification('📷 Switched camera!')
+    }
+})
 
 // START BUTTON
 // ------------
@@ -91,6 +113,7 @@ toggleCameraBtn.addEventListener('click', () => video.toggleFacingMode)
 const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
 startBtn.addEventListener('click', async () => {
     await video.captureStream()
+    showNotification('▶️ Playback started!')
     draw()
 })
 
@@ -98,7 +121,10 @@ startBtn.addEventListener('click', async () => {
 // -----------
 
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
-stopBtn.addEventListener('click', () => video.pause())
+stopBtn.addEventListener('click', () => {
+    video.pause()
+    showNotification('🛑 Playback stopped!')
+})
 
 //  SCREENSHOT BUTTON
 //  -----------------
@@ -118,9 +144,11 @@ screenshotButton.addEventListener('click', () => {
         download.setAttribute('href', snapshot)
         download.setAttribute('download', 'screenshot.png')
         download.click()
+        showNotification('📸 Screenshot Captured!')
     } else if (renderer.type === 'html' || renderer.type === 'text') {
         //  If using a text-based renderer, copy the snapshot to clipboard
         navigator.clipboard.writeText(snapshot)
+        showNotification('📋 Copied to Clipboard!')
     }
 
     //  Disable the screenshot button for timeoutDuration to prevent spam
@@ -133,7 +161,11 @@ screenshotButton.addEventListener('click', () => {
 
 const clearScreenButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.CLEAR_SCREEN))
 
-clearScreenButton.addEventListener('click', () => renderer.clean())
+clearScreenButton.addEventListener('click', () => {
+    if (!video.element.paused) { video.pause() }
+    renderer.clean()
+    showNotification('🖥️ Clear Screen')
+})
 
 //  TOGGLE THEME BUTTON
 //  -------------------
@@ -146,6 +178,8 @@ const getToggleThemeEmoji = () => document.body.classList.contains(CONSTANTS.DAR
 /** Returns the current theme */
 const getTheme = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? 'dark' : 'light'
 
+/** Returns the current theme emoji */
+const getThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌙' : '🌞'
 
 //  Initialize toggleThemeButton innerText
 toggleThemeButton.innerText = getToggleThemeEmoji()
@@ -153,29 +187,7 @@ toggleThemeButton.innerText = getToggleThemeEmoji()
 //  Toggle the DARK_MODE class on the body and update the toggleThemeButton's innerText
 toggleThemeButton.addEventListener('click', () => {
     document.body.classList.toggle(CONSTANTS.DARK_MODE)
-    toggleThemeButton.innerText = getToggleThemeEmoji()
-    addNotification(`Enabled ${getTheme()}-mode`)
+    const emoji =
+        toggleThemeButton.innerText = getToggleThemeEmoji()
+    showNotification(`${getThemeEmoji()} Enabled ${getTheme()}-mode`)
 })
-
-// =============
-// NOTIFICATIONS
-// =============
-
-const notifications = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.NOTIFICATIONS))
-
-const notificationsTimeout = 2000
-
-function addNotification(text) {
-    const toast = document.createElement('div')
-    toast.classList.add("notification", "fade-in")
-    toast.innerText = text
-
-    notifications.appendChild(toast)
-
-    setTimeout(() => {
-        toast.classList.add('fade-out')
-        setTimeout(() => {
-            notifications.removeChild(toast)
-        }, 500)
-    }, notificationsTimeout)
-}
