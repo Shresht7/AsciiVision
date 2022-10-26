@@ -90,6 +90,19 @@ select {
     padding: 0.33rem 0.25rem;
 }
 
+button,
+select {
+    cursor: pointer;
+}
+
+input[type="range"] {
+    cursor: grab;
+}
+
+input[type="range"]:active {
+    cursor: grabbing;
+}
+
 /* ========= */
 /* UTILITIES */
 /* ========= */
