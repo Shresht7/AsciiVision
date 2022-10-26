@@ -26,6 +26,11 @@
     --font-family-ascii: 'Courier New', Courier, monospace;
 
     --font-size-ascii: 8px;
+
+    /* TRANSITIONS */
+    /* ----------- */
+
+    --transition-duration: 250ms;
 }
 
 /* ========= */
@@ -90,6 +95,52 @@ select {
     padding: 0.33rem 0.25rem;
 }
 
+button,
+select {
+    cursor: pointer;
+}
+
+input[type="range"] {
+    cursor: grab;
+}
+
+input[type="range"]:active {
+    cursor: grabbing;
+}
+
+/* ========================== */
+/* ANIMATIONS AND TRANSITIONS */
+/* ========================== */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.fade-in {
+    animation: fade-in var(--transition-duration) ease-in forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fade-out var(--transition-duration) ease-out forwards;
+}
+
 /* ========= */
 /* UTILITIES */
 /* ========= */
@@ -138,6 +189,30 @@ main {
     }
 }
 
+#notifications-area {
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    width: 20vw;
+    max-height: 40vh;
+    overflow: hidden;
+    transform: translate(-50%, 0%);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.notification {
+    width: 100%;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+}
+
 #control-panel {
     flex: 1;
     height: 100%;
@@ -182,4 +257,8 @@ main {
     right: 0;
     top: 0;
     border-radius: 0.5rem;
+}
+
+#offscreen {
+    display: none;
 }

@@ -30,9 +30,19 @@ export const CTRL_RENDERER_SELECT = 'renderer-select'
 export const ASCII_VIDEO = 'ascii-video'
 export const ASCII_CANVAS = 'ascii-canvas'
 
+/** Screenshot Button */
+export const SCREENSHOT = 'screenshot'
 /** Clear Screen Button */
 export const CLEAR_SCREEN = 'clear-screen'
 /** Toggle Theme Button */
 export const TOGGLE_THEME = 'toggle-theme'
 /** Dark-Mode class name */
 export const DARK_MODE = 'dark-mode'
+
+/** Offscreen Element */
+export const OFFSCREEN = 'offscreen'
+/** Offscreen Download Anchor */
+export const OFFSCREEN_ANCHOR = 'offscreen-anchor'
+
+/** Notifications */
+export const NOTIFICATIONS = 'notifications-area'
