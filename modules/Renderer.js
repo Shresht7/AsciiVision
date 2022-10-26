@@ -166,7 +166,7 @@ export class CanvasRenderer extends Renderer {
         const parentElement = /** @type HTMLElement */ (this.element.parentElement)
         this.element.width = parentElement?.clientWidth || WIDTH * this.options.scale
         this.element.height = parentElement?.clientHeight || HEIGHT * this.options.scale
-        this.ctx.fillStyle = window.getComputedStyle(parentElement).getPropertyValue('--color-light')
+        this.ctx.fillStyle = window.getComputedStyle(parentElement).getPropertyValue('--color-text')
     }
 
     /**

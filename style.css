@@ -19,6 +19,9 @@
     --color-dark: var(--color-black);
     --color-light: var(--color-white);
 
+    --color-text: var(--color-dark);
+    --color-background: var(--color-light);
+
     /* FONT */
     /* ---- */
 
@@ -160,8 +163,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-light);
-    color: var(--color-dark);
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 header {
@@ -208,8 +211,8 @@ main {
 
 .notification {
     width: 100%;
-    color: var(--color-light);
-    background-color: var(--color-dark);
+    color: var(--color-background);
+    background-color: var(--color-text);
     padding: 0.5rem 1rem;
     border-radius: 2px;
 }
