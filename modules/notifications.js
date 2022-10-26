@@ -1,11 +1,8 @@
-//  Library
-import { NOTIFICATIONS } from "./constants.js"
-
 // =============
 // NOTIFICATIONS
 // =============
 
-const notifications = /** @type HTMLDivElement */ (document.getElementById(NOTIFICATIONS))
+const notifications = /** @type HTMLDivElement */ (document.getElementById('notifications-area'))
 
 /** Time after which the notification should fade-out */
 const notificationsTimeout = 2000
@@ -15,10 +12,12 @@ const notificationsTimeout = 2000
  * @param {string} text Text to display as a notification
  */
 export function showNotification(text) {
+    //  Create the notification toast
     const toast = document.createElement('div')
     toast.classList.add("notification", "fade-in")
     toast.innerText = text
 
+    //  Add toast to the notifications area
     notifications.appendChild(toast)
 
     //  Set Timeout to remove the element after notificationTimeout

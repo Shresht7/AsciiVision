@@ -52,6 +52,3 @@ export const DARK_MODE = 'dark-mode'
 export const OFFSCREEN = 'offscreen'
 /** Offscreen Download Anchor */
 export const OFFSCREEN_ANCHOR = 'offscreen-anchor'
-
-/** Notifications */
-export const NOTIFICATIONS = 'notifications-area'
