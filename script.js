@@ -105,16 +105,27 @@ stopBtn.addEventListener('click', () => video.pause())
 
 const download = /** @type HTMLAnchorElement */ (document.getElementById(CONSTANTS.OFFSCREEN_ANCHOR))
 
+/** Time in milliseconds to disable the screenshot button as an attempt to prevent the user from spamming it. */
+const timeoutDuration = 500
+
 const screenshotButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.SCREENSHOT))
 screenshotButton.addEventListener('click', () => {
+    //  Get the snapshot from the renderer
     const snapshot = renderer.snapshot()
+
     if (renderer.type === 'canvas') {
+        //  If using the canvas-based renderer, download the screenshot
         download.setAttribute('href', snapshot)
         download.setAttribute('download', 'screenshot.png')
         download.click()
     } else if (renderer.type === 'html' || renderer.type === 'text') {
+        //  If using a text-based renderer, copy the snapshot to clipboard
         navigator.clipboard.writeText(snapshot)
     }
+
+    //  Disable the screenshot button for timeoutDuration to prevent spam
+    screenshotButton.setAttribute('disabled', 'true')
+    setTimeout(() => { screenshotButton.removeAttribute('disabled') }, timeoutDuration)
 })
 
 // CLEAR CANVAS BUTTON
