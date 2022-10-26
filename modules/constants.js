@@ -27,6 +27,8 @@ export const CTRL_SENSITIVITY_SLIDER = 'sensitivity-slider'
 export const CTRL_RENDERER_SELECT = 'renderer-select'
 
 
+export const COLOR_MODE_CHECKBOX = 'color-mode'
+
 /** Characters to use to draw pixels */
 export const DEFAULT_CHARSET = "█▓▒Ñ@#W$9876543210?!abc;:+=-,._ "
 // const DEFAULT_CHARSET = '       .:-i|=+%O#@'

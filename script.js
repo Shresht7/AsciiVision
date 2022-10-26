@@ -70,6 +70,13 @@ rendererSelection.addEventListener('input', (e) => {
     showNotification(`📹 Switched to ${value} renderer!`)
 })
 
+const colorModeCheckbox = /** @type HTMLInputElement */ (document.getElementById(CONSTANTS.COLOR_MODE_CHECKBOX))
+
+colorModeCheckbox.addEventListener('change', (e) => {
+    const target = /** @type HTMLInputElement */ (e.target)
+    renderer.updateOptions({ colorMode: target.checked })
+})
+
 //  CHARACTER SET INPUT
 //  -------------------
 
