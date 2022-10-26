@@ -141,13 +141,41 @@ clearScreenButton.addEventListener('click', () => renderer.clean())
 const toggleThemeButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_THEME))
 
 /** Select the appropriate emoji based on the current theme */
-const getToggleThemeText = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌞' : '🌙'
+const getToggleThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌞' : '🌙'
+
+/** Returns the current theme */
+const getTheme = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? 'dark' : 'light'
+
 
 //  Initialize toggleThemeButton innerText
-toggleThemeButton.innerText = getToggleThemeText()
+toggleThemeButton.innerText = getToggleThemeEmoji()
 
 //  Toggle the DARK_MODE class on the body and update the toggleThemeButton's innerText
 toggleThemeButton.addEventListener('click', () => {
     document.body.classList.toggle(CONSTANTS.DARK_MODE)
-    toggleThemeButton.innerText = getToggleThemeText()
+    toggleThemeButton.innerText = getToggleThemeEmoji()
+    addNotification(`Enabled ${getTheme()}-mode`)
 })
+
+// =============
+// NOTIFICATIONS
+// =============
+
+const notifications = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.NOTIFICATIONS))
+
+const notificationsTimeout = 2000
+
+function addNotification(text) {
+    const toast = document.createElement('div')
+    toast.classList.add("notification", "fade-in")
+    toast.innerText = text
+
+    notifications.appendChild(toast)
+
+    setTimeout(() => {
+        toast.classList.add('fade-out')
+        setTimeout(() => {
+            notifications.removeChild(toast)
+        }, 500)
+    }, notificationsTimeout)
+}
