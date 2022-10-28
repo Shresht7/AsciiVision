@@ -3,10 +3,11 @@
 //  Library
 import { Source } from "./Source.js"
 import { Video } from "./Video.js"
-import { VIDEO, SOURCE_CANVAS } from "../constants.js"
 
-export const video = new Video(VIDEO)
+const SOURCE_VIDEO = 'source-video'
+const SOURCE_CANVAS = 'source-canvas'
 
+export const video = new Video(SOURCE_VIDEO)
 export const source = new Source(SOURCE_CANVAS)
 
 source.element = video.element

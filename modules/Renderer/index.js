@@ -2,12 +2,13 @@
 
 //  Library
 import { Renderer, CanvasRenderer, HTMLRenderer } from "./Renderer.js"
-import { ASCII_VIDEO, ASCII_CANVAS } from "../constants.js"
 
 //  =====
 //  ASCII
 //  =====
 
+const ASCII_VIDEO = 'ascii-video'
+const ASCII_CANVAS = 'ascii-canvas'
 
 const html = /** @type HTMLDivElement */ (document.getElementById(ASCII_VIDEO))
 const canvas = /** @type HTMLCanvasElement */ (document.getElementById(ASCII_CANVAS))
