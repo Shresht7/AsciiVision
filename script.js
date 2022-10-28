@@ -6,34 +6,8 @@
 
 import * as CONSTANTS from "./modules/constants.js"
 import { source, video } from './modules/Source/index.js'
-import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
+import { renderer, selectRenderer } from "./modules/Renderer/index.js"
 import { showNotification } from "./modules/notifications.js"
-
-//  =====
-//  ASCII
-//  =====
-
-
-const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
-const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
-
-/** @type {Renderer} */
-let renderer = new CanvasRenderer(canvas)
-
-/**
- * Select the Renderer
- * @param {'canvas' | 'html' | 'text'} option Renderer Modes
- */
-export function selectRenderer(option) {
-    if (renderer.type === option) { return }
-    renderer.clean()
-    switch (option) {
-        case 'canvas': renderer = new CanvasRenderer(canvas); break;
-        case 'html': renderer = new HTMLRenderer(html); break;
-        case 'text': renderer = new HTMLRenderer(html); break;
-        default: renderer = new CanvasRenderer(canvas);
-    }
-}
 
 //  ====
 //  DRAW

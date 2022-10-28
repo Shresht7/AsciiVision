@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "./constants.js"
+import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "../constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
