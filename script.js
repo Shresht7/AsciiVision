@@ -154,28 +154,3 @@ clearScreenButton.addEventListener('click', () => {
     renderer.clean()
     showNotification('🖥️ Clear Screen')
 })
-
-//  TOGGLE THEME BUTTON
-//  -------------------
-
-const toggleThemeButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_THEME))
-
-/** Select the appropriate emoji based on the current theme */
-const getToggleThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌞' : '🌙'
-
-/** Returns the current theme */
-const getTheme = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? 'dark' : 'light'
-
-/** Returns the current theme emoji */
-const getThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌙' : '🌞'
-
-//  Initialize toggleThemeButton innerText
-toggleThemeButton.innerText = getToggleThemeEmoji()
-
-//  Toggle the DARK_MODE class on the body and update the toggleThemeButton's innerText
-toggleThemeButton.addEventListener('click', () => {
-    document.body.classList.toggle(CONSTANTS.DARK_MODE)
-    const emoji =
-        toggleThemeButton.innerText = getToggleThemeEmoji()
-    showNotification(`${getThemeEmoji()} Enabled ${getTheme()}-mode`)
-})
