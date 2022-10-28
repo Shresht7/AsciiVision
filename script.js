@@ -7,7 +7,7 @@
 import * as CONSTANTS from "./modules/constants.js"
 import { source, video } from './modules/Source/index.js'
 import { renderer, selectRenderer } from "./modules/Renderer/index.js"
-import { showNotification } from "./modules/notifications.js"
+import { showNotification } from "./modules/utilities/index.js"
 
 //  ====
 //  DRAW
@@ -94,8 +94,8 @@ toggleCameraBtn.addEventListener('click', () => {
     }
 })
 
-// START BUTTON
-// ------------
+// START CAPTURE BUTTON
+// --------------------
 
 const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
 startBtn.addEventListener('click', async () => {
@@ -105,8 +105,8 @@ startBtn.addEventListener('click', async () => {
     showNotification('▶️ Playback started!')
 })
 
-// STOP BUTTON
-// -----------
+// STOP CAPTURE BUTTON
+// -------------------
 
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 stopBtn.addEventListener('click', () => {
