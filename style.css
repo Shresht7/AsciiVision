@@ -145,17 +145,12 @@ input[type="range"]:active {
     animation: fade-out var(--transition-duration) ease-out forwards;
 }
 
-/* ========= */
-/* UTILITIES */
-/* ========= */
-
-.display-none {
-    display: none;
-}
-
 /* ====== */
-/* LAYOUT */
+/* STYLES */
 /* ====== */
+
+/* BODY */
+/* ---- */
 
 body {
     position: relative;
@@ -167,6 +162,9 @@ body {
     color: var(--color-text);
 }
 
+/* HEADER */
+/* ------ */
+
 header {
     width: 100%;
     display: flex;
@@ -176,22 +174,8 @@ header {
     padding-inline: 0.5rem;
 }
 
-main {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 3rem;
-    padding: 1rem;
-}
-
-@media screen and (max-width: 640px) {
-    main {
-        flex-direction: column-reverse;
-    }
-}
+/* NOTIFICATIONS */
+/* ------------- */
 
 #notifications-area {
     position: absolute;
@@ -217,6 +201,30 @@ main {
     border-radius: 2px;
 }
 
+
+/* MAIN */
+/* ---- */
+
+main {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+    main {
+        flex-direction: column-reverse;
+    }
+}
+
+/* CONTROL PANEL */
+/* ------------- */
+
 #control-panel {
     flex: 1;
     height: 100%;
@@ -240,6 +248,9 @@ main {
     gap: 0.5rem;
 }
 
+/* ASCII */
+/* ----- */
+
 #ascii-video-container {
     height: 90vh;
     flex: 3;
@@ -257,12 +268,28 @@ main {
     line-height: var(--font-size-ascii);
 }
 
-#video {
+/* SOURCE */
+/* ------ */
+
+aside {
+    width: 150px;
     position: absolute;
     right: 0;
     top: 0;
+}
+
+aside>* {
+    width: 100%;
     border-radius: 0.5rem;
 }
+
+/* FOOTER */
+/* ------ */
+
+
+
+/* OFFSCREEN */
+/* --------- */
 
 #offscreen {
     display: none;
