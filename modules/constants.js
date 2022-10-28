@@ -13,7 +13,7 @@ export const HEIGHT = 90
 /** Video element to capture user media from */
 export const VIDEO = 'video'
 /** Canvas associated with the user-media video element used to obtain pixel data */
-export const VIDEO_CANVAS = 'video-canvas'
+export const SOURCE_CANVAS = 'source-canvas'
 
 /** Control panel button to toggle between cameras */
 export const CTRL_TOGGLE_CAMERA = 'toggle-camera'

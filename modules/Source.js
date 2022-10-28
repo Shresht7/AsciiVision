@@ -4,19 +4,24 @@
 import { WIDTH, HEIGHT } from "./constants.js"
 
 //  ======
-//  CANVAS
+//  SOURCE
 //  ======
 
-export class Canvas {
+export class Source {
 
     /** @type HTMLCanvasElement */
-    element
+    canvas
     /** @type CanvasRenderingContext2D */
     ctx
+    /** @type HTMLImageElement | HTMLVideoElement */
+    element
 
+    /**
+     * @param {string} id ID of the source-canvas element
+     */
     constructor(id) {
-        this.element = /** @type HTMLCanvasElement */ (document.getElementById(id))
-        this.ctx = /** @type CanvasRenderingContext2D */ (this.element.getContext('2d', { willReadFrequently: true }))
+        this.canvas = /** @type HTMLCanvasElement */ (document.getElementById(id))
+        this.ctx = /** @type CanvasRenderingContext2D */ (this.canvas.getContext('2d', { willReadFrequently: true }))
     }
 
     /**
@@ -37,8 +42,8 @@ export class Canvas {
      */
     render(image, width = WIDTH, height = HEIGHT) {
         if (!width || !height) { return this.clear() }
-        this.element.width = width
-        this.element.height = height
+        this.canvas.width = width
+        this.canvas.height = height
         this.ctx.drawImage(image, 0, 0, width, height)
     }
 
@@ -48,7 +53,7 @@ export class Canvas {
      */
     getPixelData() {
         //  Retrieve image data from the canvas context.
-        const imageData = this.ctx.getImageData(0, 0, this.element.width, this.element.height)
+        const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height)
         const data = imageData.data
 
         //  Variables to keep track of position in the 2D array
@@ -61,7 +66,7 @@ export class Canvas {
         //  Iterate over the pixel array value-by-value
         for (let i = 0; i < data.length; i += 4) {
             //  Initialize a new row if needed
-            if (!result[row]) { result[row] = new Array(this.element.width) }
+            if (!result[row]) { result[row] = new Array(this.canvas.width) }
 
             //  Capture RGBA values from pixel array
             const r = data[i + 0]
@@ -71,10 +76,10 @@ export class Canvas {
             result[row][column] = [r, g, b, a]
 
             //  Traverse the pixel array
-            if (column < this.element.width) {      //  Increment columns till the element width...
+            if (column < this.canvas.width) {      //  Increment columns till the element width...
                 column++
             }
-            if (column === this.element.width) {    // ...then reset column, and increment row.
+            if (column === this.canvas.width) {    // ...then reset column, and increment row.
                 column = 0
                 row++
             }

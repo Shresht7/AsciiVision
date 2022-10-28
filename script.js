@@ -6,7 +6,7 @@
 
 import * as CONSTANTS from "./modules/constants.js"
 import { Video } from "./modules/Video.js"
-import { Canvas } from "./modules/Canvas.js"
+import { Source } from "./modules/Source.js"
 import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
 import { showNotification } from "./modules/notifications.js"
 
@@ -15,7 +15,7 @@ import { showNotification } from "./modules/notifications.js"
 //  =====
 
 const video = new Video(CONSTANTS.VIDEO)
-const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
+const sourceCanvas = new Source(CONSTANTS.SOURCE_CANVAS)
 
 //  =====
 //  ASCII
@@ -49,8 +49,8 @@ export function selectRenderer(option) {
 
 function draw() {
     if (!video.stream?.active) { return }
-    videoCanvas.render(video.element)
-    renderer.render(videoCanvas.getPixelData())
+    sourceCanvas.render(video.element)
+    renderer.render(sourceCanvas.getPixelData())
     requestAnimationFrame(draw)
 }
 
