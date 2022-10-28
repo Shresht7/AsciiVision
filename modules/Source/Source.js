@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { WIDTH, HEIGHT } from "./constants.js"
+import { WIDTH, HEIGHT } from "../constants.js"
 
 //  ======
 //  SOURCE
@@ -40,7 +40,7 @@ export class Source {
      * @param {number} width Width to render
      * @param {number} height Height to render
      */
-    render(image, width = WIDTH, height = HEIGHT) {
+    render(image = this.element, width = WIDTH, height = HEIGHT) {
         if (!width || !height) { return this.clear() }
         this.canvas.width = width
         this.canvas.height = height
