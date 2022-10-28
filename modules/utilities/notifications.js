@@ -1,8 +1,12 @@
+//@ts-check
+
 // =============
 // NOTIFICATIONS
 // =============
 
-const notifications = /** @type HTMLDivElement */ (document.getElementById('notifications-area'))
+const NOTIFICATIONS_AREA = 'notifications-area'
+
+const notifications = /** @type HTMLDivElement */ (document.getElementById(NOTIFICATIONS_AREA))
 
 /** Time after which the notification should fade-out */
 const notificationsTimeout = 2000

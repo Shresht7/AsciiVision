@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { WIDTH, HEIGHT } from './constants.js'
+import { WIDTH, HEIGHT } from '../constants.js'
 
 // =====
 // VIDEO

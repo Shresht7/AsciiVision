@@ -55,8 +55,12 @@
             </div>
 
             <div>
-                <label for="color-mode">Color Mode</label>
-                <input type="checkbox" id="color-mode" name="color-mode"></input>
+                <fieldset>
+                    <span>
+                        <input type="checkbox" id="color-mode" name="color-mode" value="Color" checked />
+                        <label for="color-mode">Color Mode</label>
+                    </span>
+                </fieldset>
             </div>
 
             <!-- CHARACTER-SET INPUT -->
@@ -88,16 +92,16 @@
             </div>
         </section>
 
-        <!-- ASCII CONTAINER -->
+        <!-- ASCII -->
         <div id="ascii-video-container">
             <!-- TODO: #7 Add Welcome Text and Instructions -->
             <div id="ascii-video"></div>
             <canvas id="ascii-canvas"></canvas>
 
-            <!-- VIDEO STREAM -->
+            <!-- SOURCE -->
             <aside>
-                <video id="video">Video Steam Unavailable</video>
-                <canvas id="video-canvas" class="display-none"></canvas>
+                <video id="source-video">Video Steam Unavailable</video>
+                <canvas id="source-canvas" hidden></canvas>
             </aside>
         </div>
 

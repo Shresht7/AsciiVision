@@ -1,7 +1,7 @@
 //@ts-check
 
 //  Library
-import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "./constants.js"
+import { HEIGHT, WIDTH, DEFAULT_CHARSET } from "../constants.js"
 
 //  Type Definitions
 /** @typedef {[number, number, number, number]} PixelData */
@@ -44,7 +44,8 @@ export class Renderer {
      * @param {string | ((charset: string) => string)} cb Callback function to transform the charset
      */
     updateCharset(cb) {
-        this.CHARSET = typeof cb === 'string' ? cb : cb(this.CHARSET)
+        const CHARSET = typeof cb === 'string' ? cb : cb(this.options.CHARSET)
+        this.updateOptions({ CHARSET })
     }
 
     /**

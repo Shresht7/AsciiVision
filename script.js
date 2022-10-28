@@ -5,52 +5,17 @@
 //  =======
 
 import * as CONSTANTS from "./modules/constants.js"
-import { Video } from "./modules/Video.js"
-import { Canvas } from "./modules/Canvas.js"
-import { Renderer, HTMLRenderer, CanvasRenderer } from "./modules/Renderer.js"
-import { showNotification } from "./modules/notifications.js"
-
-//  =====
-//  VIDEO
-//  =====
-
-const video = new Video(CONSTANTS.VIDEO)
-const videoCanvas = new Canvas(CONSTANTS.VIDEO_CANVAS)
-
-//  =====
-//  ASCII
-//  =====
-
-
-const html = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO))
-const canvas = /** @type HTMLCanvasElement */ (document.getElementById(CONSTANTS.ASCII_CANVAS))
-
-/** @type {Renderer} */
-let renderer = new CanvasRenderer(canvas)
-
-/**
- * Select the Renderer
- * @param {'canvas' | 'html' | 'text'} option Renderer Modes
- */
-export function selectRenderer(option) {
-    if (renderer.type === option) { return }
-    renderer.clean()
-    switch (option) {
-        case 'canvas': renderer = new CanvasRenderer(canvas); break;
-        case 'html': renderer = new HTMLRenderer(html); break;
-        case 'text': renderer = new HTMLRenderer(html); break;
-        default: renderer = new CanvasRenderer(canvas);
-    }
-}
+import { source, video } from './modules/Source/index.js'
+import { renderer, selectRenderer } from "./modules/Renderer/index.js"
+import { showNotification } from "./modules/utilities/index.js"
 
 //  ====
 //  DRAW
 //  ====
 
 function draw() {
-    if (!video.stream?.active) { return }
-    videoCanvas.render(video.element)
-    renderer.render(videoCanvas.getPixelData())
+    source.render()
+    renderer.render(source.getPixelData())
     requestAnimationFrame(draw)
 }
 
@@ -70,11 +35,15 @@ rendererSelection.addEventListener('input', (e) => {
     showNotification(`📹 Switched to ${value} renderer!`)
 })
 
+//  COLOR MODE CHECKBOX
+//  -------------------
+
 const colorModeCheckbox = /** @type HTMLInputElement */ (document.getElementById(CONSTANTS.COLOR_MODE_CHECKBOX))
 
 colorModeCheckbox.addEventListener('change', (e) => {
     const target = /** @type HTMLInputElement */ (e.target)
     renderer.updateOptions({ colorMode: target.checked })
+    showNotification(`${target.checked ? 'Enabled' : 'Disabled'} colors`)
 })
 
 //  CHARACTER SET INPUT
@@ -125,8 +94,8 @@ toggleCameraBtn.addEventListener('click', () => {
     }
 })
 
-// START BUTTON
-// ------------
+// START CAPTURE BUTTON
+// --------------------
 
 const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
 startBtn.addEventListener('click', async () => {
@@ -136,8 +105,8 @@ startBtn.addEventListener('click', async () => {
     showNotification('▶️ Playback started!')
 })
 
-// STOP BUTTON
-// -----------
+// STOP CAPTURE BUTTON
+// -------------------
 
 const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 stopBtn.addEventListener('click', () => {
@@ -184,29 +153,4 @@ clearScreenButton.addEventListener('click', () => {
     video.stop()
     renderer.clean()
     showNotification('🖥️ Clear Screen')
-})
-
-//  TOGGLE THEME BUTTON
-//  -------------------
-
-const toggleThemeButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_THEME))
-
-/** Select the appropriate emoji based on the current theme */
-const getToggleThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌞' : '🌙'
-
-/** Returns the current theme */
-const getTheme = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? 'dark' : 'light'
-
-/** Returns the current theme emoji */
-const getThemeEmoji = () => document.body.classList.contains(CONSTANTS.DARK_MODE) ? '🌙' : '🌞'
-
-//  Initialize toggleThemeButton innerText
-toggleThemeButton.innerText = getToggleThemeEmoji()
-
-//  Toggle the DARK_MODE class on the body and update the toggleThemeButton's innerText
-toggleThemeButton.addEventListener('click', () => {
-    document.body.classList.toggle(CONSTANTS.DARK_MODE)
-    const emoji =
-        toggleThemeButton.innerText = getToggleThemeEmoji()
-    showNotification(`${getThemeEmoji()} Enabled ${getTheme()}-mode`)
 })
