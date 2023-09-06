@@ -32,5 +32,19 @@ toggleThemeButton.innerText = getOppositeThemeEmoji()
 toggleThemeButton.addEventListener('click', () => {
     document.body.classList.toggle(DARK_MODE_CLASS)
     toggleThemeButton.innerText = getOppositeThemeEmoji()
-    showNotification(`${getThemeEmoji()} Enabled ${getTheme()}-mode`)
+
+    const theme = getTheme()
+    showNotification(`${getThemeEmoji()} Enabled ${theme}-mode`)
+    localStorage.setItem('theme', theme)
+})
+
+// INITIALIZE THEME
+// ----------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add(DARK_MODE_CLASS)
+    } else {
+        document.body.classList.remove(DARK_MODE_CLASS)
+    }
 })
