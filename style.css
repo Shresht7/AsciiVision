@@ -50,9 +50,8 @@
 
 html,
 body {
-    min-height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    height: 100dvh;
+    width: 100dvw;
     font-family: var(--font-family);
 }
 
@@ -214,7 +213,6 @@ main {
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
-    padding: 1rem;
 }
 
 @media screen and (max-width: 640px) {
