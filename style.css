@@ -88,6 +88,16 @@ select {
 /* GENERAL */
 /* ======= */
 
+a {
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 2px solid var(--color-text);
+}
+
 button {
     font-family: inherit;
 }
