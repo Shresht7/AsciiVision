@@ -24,14 +24,9 @@
 <body>
 
     <!-- HEADER -->
-    <header>
+    <header class="horizontal-stack">
         <h1>AsciiVision</h1>
-        <div>
-            <button type="button" id="screenshot">📷</button>
-            <button type="button" id="clear-screen">CLEAR</button>
-            <button type="button" id="toggle-theme">🌙</button>
-            <button type="button" id="toggle-control-panel">⚙️</button>
-        </div>
+        <button type="button" id="toggle-control-panel">⚙️</button>
     </header>
 
     <!-- NOTIFICATIONS -->
@@ -40,7 +35,6 @@
     <main>
 
         <!-- CONTROL PANEL -->
-        <!-- This section houses the controls that change the parameters of the ascii output -->
         <section id="control-panel">
             <h2>Control Panel</h2>
 
@@ -74,26 +68,18 @@
                 </datalist>
             </div>
 
+            <!-- TOGGLE THEME -->
+            <button type="button" id="toggle-theme">🌙</button>
+
             <!-- SENSITIVITY SLIDER -->
             <div>
                 <label for="sensitivity-slider">Sensitivity</label>
                 <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="30" value="15" />
             </div>
-
-            <!-- TOGGLE CAMERA BUTTON -->
-            <div>
-                <button type="button" id="toggle-camera">Toggle Camera</button>
-            </div>
-
-            <!-- START AND STOP BUTTONS -->
-            <div>
-                <button type="button" id="start">Start</button>
-                <button type="button" id="stop">Stop</button>
-            </div>
         </section>
 
         <!-- ASCII -->
-        <div id="ascii-video-container">
+        <section id="ascii-video-container">
             <!-- TODO: #7 Add Welcome Text and Instructions -->
             <div id="ascii-video"></div>
             <canvas id="ascii-canvas"></canvas>
@@ -103,13 +89,16 @@
                 <video id="source-video">Video Steam Unavailable</video>
                 <canvas id="source-canvas" hidden></canvas>
             </aside>
-        </div>
+        </section>
 
     </main>
 
+    <!-- FOOTER -->
     <footer>
-        <div class="desktop-only">
-            <a href="https://github.com/Shresht7/AsciiVision">GitHub</a>
+        <div id="camera-controls" class="horizontal-stack">
+            <button type="button" id="toggle-camera">💡</button>
+            <button type="button" id="start">▶️</button>
+            <button type="button" id="screenshot">📷</button>
         </div>
     </footer>
 

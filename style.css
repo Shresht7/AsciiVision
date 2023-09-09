@@ -129,6 +129,14 @@ input[type="range"]:active {
     display: none !important;
 }
 
+.horizontal-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media screen and (max-width: 640px) {
     .desktop-only {
         display: none !important;
@@ -172,8 +180,16 @@ input[type="range"]:active {
 /* STYLES */
 /* ====== */
 
-/* BODY */
-/* ---- */
+header,
+footer {
+    width: 100%;
+}
+
+header {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
 
 body {
     position: relative;
@@ -183,19 +199,6 @@ body {
     align-items: center;
     background-color: var(--color-background);
     color: var(--color-text);
-    padding: 0.5rem 1rem;
-}
-
-/* HEADER */
-/* ------ */
-
-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline: 0.5rem;
 }
 
 /* NOTIFICATIONS */
@@ -206,7 +209,7 @@ header {
     top: 0.5rem;
     left: 50%;
     width: 20vw;
-    max-height: 40vh;
+    max-height: 40dvh;
     overflow: hidden;
     transform: translate(-50%, 0%);
     display: flex;
@@ -251,7 +254,7 @@ main {
 #control-panel {
     flex: 1;
     height: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -283,7 +286,7 @@ main {
 /* ----- */
 
 #ascii-video-container {
-    height: 90vh;
+    height: 90dvh;
     flex: 3;
     display: grid;
     place-content: center;
@@ -314,10 +317,21 @@ aside>* {
     border-radius: 0.5rem;
 }
 
-/* FOOTER */
-/* ------ */
+/* CAMERA CONTROLS */
+/* --------------- */
 
+#camera-controls {
+    justify-content: space-around;
+    background-color: var(--color-dark);
+    height: 15dvh;
+}
 
+#camera-controls>button {
+    --button-size: 75px;
+    border-radius: 50%;
+    width: var(--button-size);
+    height: var(--button-size);
+}
 
 /* OFFSCREEN */
 /* --------- */

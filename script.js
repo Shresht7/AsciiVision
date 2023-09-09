@@ -120,13 +120,13 @@ startBtn.addEventListener('click', async () => {
 // STOP CAPTURE BUTTON
 // -------------------
 
-const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
-stopBtn.addEventListener('click', () => {
-    video.stop()
-    renderer.clean()
-    source.element.classList.add('hide')
-    showNotification('🛑 Playback stopped!')
-})
+// const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
+// stopBtn.addEventListener('click', () => {
+//     video.stop()
+//     renderer.clean()
+//     source.element.classList.add('hide')
+//     showNotification('🛑 Playback stopped!')
+// })
 
 //  SCREENSHOT BUTTON
 //  -----------------
@@ -156,15 +156,4 @@ screenshotButton.addEventListener('click', () => {
     //  Disable the screenshot button for timeoutDuration to prevent spam
     screenshotButton.setAttribute('disabled', 'true')
     setTimeout(() => { screenshotButton.removeAttribute('disabled') }, timeoutDuration)
-})
-
-// CLEAR CANVAS BUTTON
-// -------------------
-
-const clearScreenButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.CLEAR_SCREEN))
-
-clearScreenButton.addEventListener('click', () => {
-    video.stop()
-    renderer.clean()
-    showNotification('🖥️ Clear Screen')
 })
