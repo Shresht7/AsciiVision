@@ -15,6 +15,8 @@ export const VIDEO = 'video'
 /** Canvas associated with the user-media video element used to obtain pixel data */
 export const SOURCE_CANVAS = 'source-canvas'
 
+/** Control Panel ID */
+export const CONTROL_PANEL = 'control-panel'
 /** Control panel button to toggle between cameras */
 export const CTRL_TOGGLE_CAMERA = 'toggle-camera'
 /** Control panel button to start the video capture */
@@ -45,6 +47,8 @@ export const ASCII_CANVAS = 'ascii-canvas'
 export const SCREENSHOT = 'screenshot'
 /** Clear Screen Button */
 export const CLEAR_SCREEN = 'clear-screen'
+/** Toggle Control Panel Button */
+export const TOGGLE_CONTROL_PANEL = 'toggle-control-panel'
 /** Toggle Theme Button */
 export const TOGGLE_THEME = 'toggle-theme'
 /** Dark-Mode class name */
