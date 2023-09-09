@@ -129,6 +129,12 @@ input[type="range"]:active {
     display: none !important;
 }
 
+@media screen and (max-width: 640px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
+
 /* ========================== */
 /* ANIMATIONS AND TRANSITIONS */
 /* ========================== */
