@@ -121,6 +121,14 @@ input[type="range"]:active {
     cursor: grabbing;
 }
 
+/* ========= */
+/* UTILITIES */
+/* ========= */
+
+.hide {
+    display: none !important;
+}
+
 /* ========================== */
 /* ANIMATIONS AND TRANSITIONS */
 /* ========================== */
@@ -243,10 +251,6 @@ main {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-}
-
-#control-panel.hide {
-    display: none;
 }
 
 #control-panel * {
