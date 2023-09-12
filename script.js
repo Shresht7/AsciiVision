@@ -112,25 +112,29 @@ toggleCameraBtn.addEventListener('click', () => {
 // START CAPTURE BUTTON
 // --------------------
 
-const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
-startBtn.addEventListener('click', async () => {
+async function start() {
     source.element.classList.remove('hide')
     renderer.setup()
     await video.captureStream()
     draw()
     showNotification('▶️ Playback started!')
-})
+}
+
+const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
+startBtn.addEventListener('click', start)
 
 // STOP CAPTURE BUTTON
 // -------------------
 
-// const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
-// stopBtn.addEventListener('click', () => {
+// async function stop() {
 //     video.stop()
 //     renderer.clean()
 //     source.element.classList.add('hide')
-//     showNotification('🛑 Playback stopped!')
-// })
+//     showNotification('🛑 Playback stopped!')   
+// }
+
+// const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
+// stopBtn.addEventListener('click', stop)
 
 //  SCREENSHOT BUTTON
 //  -----------------
