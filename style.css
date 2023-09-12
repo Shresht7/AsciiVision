@@ -125,6 +125,12 @@ input[type="range"]:active {
 /* UTILITIES */
 /* ========= */
 
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .hide {
     display: none !important;
 }
@@ -135,6 +141,10 @@ input[type="range"]:active {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.button {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 640px) {
