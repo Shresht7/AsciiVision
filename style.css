@@ -195,10 +195,15 @@ footer {
     width: 100%;
 }
 
+header,
+footer,
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
 header {
     padding: 0.5rem 1rem;
-    background-color: var(--color-dark);
-    color: var(--color-light);
 }
 
 body {
@@ -207,8 +212,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-background);
-    color: var(--color-text);
 }
 
 /* NOTIFICATIONS */
@@ -332,8 +335,20 @@ aside>* {
 
 #camera-controls {
     justify-content: space-around;
-    background-color: var(--color-dark);
-    height: 15dvh;
+    height: 10dvh;
+}
+
+@media screen and (width > 640px) {
+    #camera-controls {
+        justify-content: space-evenly;
+        border-radius: 5dvh;
+        margin-bottom: 2.5dvh;
+        overflow: hidden;
+    }
+
+    footer {
+        width: 33%;
+    }
 }
 
 #camera-controls>button {
