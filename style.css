@@ -147,7 +147,7 @@ input[type="range"]:active {
     cursor: pointer;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (orientation: landscape) {
     .desktop-only {
         display: none !important;
     }
@@ -255,7 +255,7 @@ main {
     gap: 3rem;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (orientation: landscape) {
     main {
         flex-direction: column-reverse;
     }
@@ -338,7 +338,7 @@ aside>* {
     height: 10dvh;
 }
 
-@media screen and (width > 640px) {
+@media screen and (orientation: landscape) {
     #camera-controls {
         justify-content: space-evenly;
         border-radius: 5dvh;
