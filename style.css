@@ -216,9 +216,9 @@ body {
 
 #notifications-area {
     position: absolute;
-    top: 0.5rem;
+    top: 10dvh;
     left: 50%;
-    width: 20vw;
+    width: 100%;
     max-height: 40dvh;
     overflow: hidden;
     transform: translate(-50%, 0%);
@@ -231,7 +231,7 @@ body {
 }
 
 .notification {
-    width: 100%;
+    width: min(80dvw, 240px);
     color: var(--color-background);
     background-color: var(--color-text);
     padding: 0.5rem 1rem;
