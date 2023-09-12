@@ -297,7 +297,6 @@ main {
 /* ----- */
 
 #ascii-video-container {
-    height: 90dvh;
     flex: 3;
     display: grid;
     place-content: center;
