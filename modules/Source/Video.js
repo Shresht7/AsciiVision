@@ -23,7 +23,7 @@ export class Video {
      * @param {string} id ID of the video element get user media stream from
      * @param {'user' | 'environment'} facingMode Camera facing mode 
      */
-    constructor(id, facingMode = 'user') {
+    constructor(id, facingMode = 'environment') {
         this.element = /** @type HTMLVideoElement */ (document.getElementById(id))
         this.facingMode = facingMode
     }
