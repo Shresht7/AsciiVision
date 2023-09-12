@@ -42,6 +42,7 @@ export const CHARACTER_SET_INPUT = 'character-set-input'
 /** Output ASCII Video Element */
 export const ASCII_VIDEO = 'ascii-video'
 export const ASCII_CANVAS = 'ascii-canvas'
+export const ASCII_VIDEO_CONTAINER = 'ascii-video-container'
 
 /** Screenshot Button */
 export const SCREENSHOT = 'screenshot'

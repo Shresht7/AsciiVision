@@ -28,10 +28,12 @@ function draw() {
 
 const controlPanel = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.CONTROL_PANEL))
 const toggleControlPanel = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_CONTROL_PANEL))
+const asciiVideoContainer = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO_CONTAINER))
 
 // Show/Hide the control panel when toggled using the button
 toggleControlPanel.addEventListener('click', () => {
     controlPanel.classList.toggle('hide')
+    asciiVideoContainer.classList.toggle('hide')
 })
 
 //  RENDERER SELECT

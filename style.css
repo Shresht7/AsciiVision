@@ -247,7 +247,7 @@ main {
     flex: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 3rem;
 }
@@ -264,7 +264,8 @@ main {
 #control-panel {
     flex: 1;
     height: 100%;
-    display: none;
+    width: 100dvw;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
