@@ -30,7 +30,7 @@ export class Video {
 
     /** Toggle Camera Facing-Mode between 'user' and 'environment' */
     toggleFacingMode() {
-        this.facingMode === 'user' ? 'environment' : 'user'
+        this.facingMode = this.facingMode === 'user' ? 'environment' : 'user'
         if (!this.element.paused) { this.captureStream() }
     }
 
