@@ -27,13 +27,15 @@ function draw() {
 // -------------
 
 const controlPanel = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.CONTROL_PANEL))
-const toggleControlPanel = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.TOGGLE_CONTROL_PANEL))
+const toggleControlPanel = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.TOGGLE_CONTROL_PANEL))
+const toggleControlPanelSvg = /** @type NodeListOf<Element> */ (document.querySelectorAll('.control-panel-svg'))
 const asciiVideoContainer = /** @type HTMLDivElement */ (document.getElementById(CONSTANTS.ASCII_VIDEO_CONTAINER))
 
 // Show/Hide the control panel when toggled using the button
 toggleControlPanel.addEventListener('click', () => {
     controlPanel.classList.toggle('hide')
     asciiVideoContainer.classList.toggle('hide')
+    toggleControlPanelSvg.forEach(element => element.classList.toggle('hide'))
 })
 
 //  RENDERER SELECT
