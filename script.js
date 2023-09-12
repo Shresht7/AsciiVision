@@ -165,3 +165,11 @@ screenshotButton.addEventListener('click', () => {
     screenshotButton.setAttribute('disabled', 'true')
     setTimeout(() => { screenshotButton.removeAttribute('disabled') }, timeoutDuration)
 })
+
+// ==========
+// DOM LOADED
+// ==========
+
+document.addEventListener('DOMContentLoaded', () => {
+    start()
+})
