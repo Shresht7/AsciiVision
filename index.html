@@ -116,9 +116,32 @@
     <!-- FOOTER -->
     <footer>
         <div id="camera-controls" class="horizontal-stack">
-            <button type="button" id="toggle-camera">💡</button>
-            <button type="button" id="start">▶️</button>
-            <button type="button" id="screenshot">📷</button>
+            <div id="toggle-camera" class="button">
+                <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M29 20C29 24.9706 24.9706 29 20 29C17.7126 29 15.6246 28.1467 14.0368 26.741L11.3345 28.3012C13.5188 30.5807 16.5936 32 20 32C26.6274 32 32 26.6274 32 20C32 18.8353 31.8341 17.7093 31.5245 16.6445L28.821 18.2053C28.9384 18.7853 29 19.3854 29 20ZM11.3562 22.5152C11.1243 21.717 11 20.873 11 20C11 15.0294 15.0294 11 20 11C22.5542 11 24.8599 12.064 26.4981 13.773L29.1535 12.2399C26.9523 9.64607 23.6684 8 20 8C13.3726 8 8 13.3726 8 20C8 21.4207 8.2469 22.7838 8.70013 24.0486L11.3562 22.5152Z"
+                        fill="var(--color-light)" />
+                    <path d="M6 22L10.5 24L13 20" stroke="var(--color-light)" stroke-width="2" />
+                    <path d="M34.0143 18.2099L29.5083 16.2875L27.0368 20.2848" stroke="var(--color-light)"
+                        stroke-width="2" />
+                </svg>
+
+            </div>
+            <div id="start" class="button">
+                <svg width="64" height="64" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M30.5708 19.1425C31.2182 19.5309 31.2182 20.4691 30.5708 20.8575L13.5145 31.0913C12.848 31.4912 12 31.0111 12 30.2338L12 9.76619C12 8.98889 12.848 8.50878 13.5145 8.9087L30.5708 19.1425Z"
+                        fill="var(--color-light)" />
+                </svg>
+            </div>
+            <div id="screenshot" class="button">
+                <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M22 13H6V29H34V13L32.5 11H24L22 13ZM20 27C23.3137 27 26 24.3137 26 21C26 17.6863 23.3137 15 20 15C16.6863 15 14 17.6863 14 21C14 24.3137 16.6863 27 20 27Z"
+                        fill="var(--color-light)" />
+                    <circle cx="20" cy="21" r="5" fill="var(--color-light)" />
+                </svg>
+            </div>
         </div>
     </footer>
 
