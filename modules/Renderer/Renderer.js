@@ -165,8 +165,9 @@ export class CanvasRenderer extends Renderer {
     /** Setup to perform when the renderer starts */
     setup() {
         const parentElement = /** @type HTMLElement */ (this.element.parentElement)
-        this.element.width = parentElement?.clientWidth || WIDTH * this.options.scale
-        this.element.height = parentElement?.clientHeight || HEIGHT * this.options.scale
+        const sourceCanvas = /** @type HTMLElement */ (document.getElementById('source-canvas'))
+        this.element.width = sourceCanvas?.clientWidth || WIDTH * this.options.scale
+        this.element.height = sourceCanvas?.clientHeight || HEIGHT * this.options.scale
         this.ctx.fillStyle = window.getComputedStyle(parentElement).getPropertyValue('--color-text')
     }
 
@@ -203,10 +204,17 @@ export class CanvasRenderer extends Renderer {
     }
 
     /**
-     * @returns ASCII Image DataURL
+     * Takes a screenshot of the current element and returns it as a DataURL.
+     * @param {string} [format='png'] - The format of the screenshot. Must be one of 'png', 'jpeg', or 'webp'.
+     * @throws {Error} If the specified format is not supported.
+     * @returns {string} The screenshot as a DataURL.
      */
-    snapshot() {
-        return this.element.toDataURL()    // TODO: #23 Support Several Screenshot Formats
+    snapshot(format = 'png') {
+        const supportedFormats = ['png', 'jpeg', 'webp']  // List of supported formats
+        if (!supportedFormats.includes(format)) {
+            throw new Error(`Unsupported format: ${format}`)
+        }
+        return this.element.toDataURL(`image/${format}`)
     }
 
     /** Cleanup to perform when the renderer stops */
