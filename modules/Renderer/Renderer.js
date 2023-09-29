@@ -204,10 +204,17 @@ export class CanvasRenderer extends Renderer {
     }
 
     /**
-     * @returns ASCII Image DataURL
+     * Takes a screenshot of the current element and returns it as a DataURL.
+     * @param {string} [format='png'] - The format of the screenshot. Must be one of 'png', 'jpeg', or 'webp'.
+     * @throws {Error} If the specified format is not supported.
+     * @returns {string} The screenshot as a DataURL.
      */
-    snapshot() {
-        return this.element.toDataURL()    // TODO: #23 Support Several Screenshot Formats
+    snapshot(format = 'png') {
+        const supportedFormats = ['png', 'jpeg', 'webp']  // List of supported formats
+        if (!supportedFormats.includes(format)) {
+            throw new Error(`Unsupported format: ${format}`)
+        }
+        return this.element.toDataURL(`image/${format}`)
     }
 
     /** Cleanup to perform when the renderer stops */
