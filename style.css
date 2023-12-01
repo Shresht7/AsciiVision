@@ -193,6 +193,7 @@ input[type="range"]:active {
 header,
 footer {
     width: 100%;
+    position: absolute;
 }
 
 header,
@@ -204,6 +205,8 @@ body {
 
 header {
     padding: 0.5rem 1rem;
+    top: 0;
+    left: 0;
 }
 
 body {
@@ -212,6 +215,26 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+@media screen and (orientation: landscape) {
+    footer {
+        bottom: auto;
+        left: auto;
+        right: 0;
+        top: 0;
+    }
+
+    footer.horizontal-stack {
+        width: 10%;
+        height: 100%;
+    }
 }
 
 /* NOTIFICATIONS */
@@ -301,7 +324,6 @@ main {
 
 #ascii-video-container {
     width: 100%;
-    height: auto;
     display: grid;
     place-content: center;
     overflow: hidden;
@@ -310,7 +332,7 @@ main {
 
 #ascii-canvas {
     width: 100%;
-    max-height: 75dvh;
+    /* max-height: 75dvh; */
     z-index: -1;
 }
 
@@ -347,6 +369,8 @@ aside>* {
 
 @media screen and (orientation: landscape) {
     #camera-controls {
+        height: 100%;
+        flex-direction: column;
         justify-content: space-evenly;
         border-radius: 5dvh;
         margin-bottom: 2.5dvh;
