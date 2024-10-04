@@ -16,11 +16,8 @@
     --color-black: hsl(0, 0%, 18%);
     --color-white: hsl(0, 0%, 100%);
 
-    --color-dark: var(--color-black);
-    --color-light: var(--color-white);
-
-    --color-text: var(--color-dark);
-    --color-background: var(--color-light);
+    --color-text: var(--color-black);
+    --color-background: var(--color-white);
 
     /* FONT */
     /* ---- */
@@ -55,11 +52,6 @@ body {
     font-family: var(--font-family);
 }
 
-.dark-mode {
-    --color-text: var(--color-light);
-    --color-background: var(--color-dark);
-}
-
 input,
 button,
 textarea,
@@ -82,6 +74,19 @@ select {
         transition-duration: 1ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-text: var(--color-black);
+        --color-background: var(--color-white);
+    }
+}
+
+
+body.dark-mode {
+    --color-text: var(--color-white);
+    --color-background: var(--color-black);
 }
 
 /* ======= */

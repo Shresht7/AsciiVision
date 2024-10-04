@@ -47,4 +47,5 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         document.body.classList.remove(DARK_MODE_CLASS)
     }
+    toggleThemeButton.innerText = getOppositeThemeEmoji()
 })
