@@ -50,6 +50,8 @@ body {
     height: 100dvh;
     width: 100dvw;
     font-family: var(--font-family);
+    color: var(--color-text);
+    background-color: var(--color-background);
 }
 
 input,
@@ -166,49 +168,36 @@ input[type="range"]:active {
 /* STYLES */
 /* ====== */
 
-header,
-footer {
-    width: 100%;
-    position: absolute;
-}
-
-header,
-footer,
-body {
-    background-color: var(--color-background);
-    color: var(--color-text);
-}
+/* LAYOUT STYLES */
+/* ------------- */
 
 header {
     padding: 0.5rem 1rem;
-    top: 0;
-    left: 0;
 }
 
 body {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-footer {
-    width: 100%;
-    bottom: 0;
-    left: 0;
-}
-
 @media screen and (orientation: landscape) {
-    footer {
-        bottom: auto;
-        left: auto;
-        right: 0;
+    body {
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header {
+        position: absolute;
         top: 0;
+        left: 0;
     }
 
     footer.horizontal-stack {
-        width: 10%;
+        width: 15%;
         height: 100%;
     }
 }
