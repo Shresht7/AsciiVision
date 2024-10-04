@@ -59,3 +59,6 @@ export const DARK_MODE = 'dark-mode'
 export const OFFSCREEN = 'offscreen'
 /** Offscreen Download Anchor */
 export const OFFSCREEN_ANCHOR = 'offscreen-anchor'
+
+/** CSS Class to hide elements */
+export const CSS_HIDDEN = 'hide'

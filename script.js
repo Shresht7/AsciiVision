@@ -33,9 +33,9 @@ const asciiVideoContainer = /** @type HTMLDivElement */ (document.getElementById
 
 // Show/Hide the control panel when toggled using the button
 toggleControlPanel.addEventListener('click', () => {
-    controlPanel.classList.toggle('hide')
-    asciiVideoContainer.classList.toggle('hide')
-    toggleControlPanelSvg.forEach(element => element.classList.toggle('hide'))
+    controlPanel.classList.toggle(CONSTANTS.CSS_HIDDEN)
+    asciiVideoContainer.classList.toggle(CONSTANTS.CSS_HIDDEN)
+    toggleControlPanelSvg.forEach(element => element.classList.toggle(CONSTANTS.CSS_HIDDEN))
 })
 
 //  RENDERER SELECT
@@ -114,7 +114,7 @@ toggleCameraBtn.addEventListener('click', () => {
 
 /** Start the video player */
 async function start() {
-    source.element.classList.remove('hide')
+    source.element.classList.remove(CONSTANTS.CSS_HIDDEN)
     renderer.setup()
     await video.captureStream()
     draw()
@@ -131,7 +131,7 @@ async function start() {
 async function stop() {
     video.stop()
     renderer.clean()
-    source.element.classList.add('hide')
+    source.element.classList.add(CONSTANTS.CSS_HIDDEN)
     showNotification('🛑 Playback stopped!')
 }
 
