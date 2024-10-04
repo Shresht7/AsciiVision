@@ -63,6 +63,10 @@ input[type="range"]:active {
     cursor: grabbing;
 }
 
+h1 {
+    font-size: 1.2rem;
+}
+
 /* ================ */
 /* USER PREFERENCES */
 /* ================ */
