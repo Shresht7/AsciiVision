@@ -101,12 +101,19 @@ slider.addEventListener('change', (e) => {
 // --------------------
 
 const toggleCameraBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_TOGGLE_CAMERA))
-toggleCameraBtn.addEventListener('click', () => {
+
+/** Toggles the camera's facing mode */
+function toggleCamera() {
     const previousMode = video.facingMode
     video.toggleFacingMode()
     if (video.facingMode !== previousMode) {
         showNotification('📷 Switched camera!')
     }
+}
+
+// Register the event listener to the toggle camera button
+toggleCameraBtn.addEventListener('click', () => {
+    toggleCamera()
 })
 
 // START CAPTURE BUTTON
