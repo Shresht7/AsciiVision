@@ -1,0 +1,29 @@
+/* CAMERA CONTROLS */
+/* --------------- */
+
+#camera-controls {
+    justify-content: space-around;
+    height: 10dvh;
+}
+
+@media screen and (orientation: landscape) {
+    #camera-controls {
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border-radius: 5dvh;
+        margin-bottom: 2.5dvh;
+        overflow: hidden;
+    }
+
+    footer {
+        width: 33%;
+    }
+}
+
+#camera-controls>button {
+    --button-size: 75px;
+    border-radius: 50%;
+    width: var(--button-size);
+    height: var(--button-size);
+}

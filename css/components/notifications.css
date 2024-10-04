@@ -1,0 +1,33 @@
+/* NOTIFICATIONS */
+/* ------------- */
+
+#notifications-area {
+    position: absolute;
+    top: 10dvh;
+    left: 50%;
+    width: 100%;
+    max-height: 40dvh;
+    overflow: hidden;
+    transform: translate(-50%, 0%);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    z-index: 100;
+}
+
+.notification {
+    width: min(80dvw, 240px);
+    color: var(--color-background);
+    background-color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+}
+
+@media screen and (orientation: landscape) {
+    #notification-area {
+        top: 1.5dvh;
+    }
+}

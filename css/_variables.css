@@ -1,0 +1,28 @@
+/* ============= */
+/* CSS VARIABLES */
+/* ============= */
+
+:root {
+
+    /* COLORS */
+    /* ------ */
+
+    --color-black: hsl(0, 0%, 18%);
+    --color-white: hsl(0, 0%, 100%);
+
+    --color-text: var(--color-black);
+    --color-background: var(--color-white);
+
+    /* FONT */
+    /* ---- */
+
+    --font-family: 'Titillium Web', monospace;
+    --font-family-ascii: 'Courier New', Courier, monospace;
+
+    --font-size-ascii: 8px;
+
+    /* TRANSITIONS */
+    /* ----------- */
+
+    --transition-duration: 250ms;
+}

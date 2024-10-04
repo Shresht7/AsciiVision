@@ -1,0 +1,94 @@
+/* ========= */
+/* NORMALIZE */
+/* ========= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100dvh;
+    width: 100dvw;
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* ======= */
+/* GENERAL */
+/* ======= */
+
+a {
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 2px solid var(--color-text);
+}
+
+button {
+    font-family: inherit;
+}
+
+button,
+select {
+    cursor: pointer;
+}
+
+button,
+select,
+input {
+    padding: 0.33rem 0.25rem;
+}
+
+input[type="range"] {
+    cursor: grab;
+}
+
+input[type="range"]:active {
+    cursor: grabbing;
+}
+
+/* ================ */
+/* USER PREFERENCES */
+/* ================ */
+
+/* Remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-text: var(--color-black);
+        --color-background: var(--color-white);
+    }
+}
+
+
+body.dark-mode {
+    --color-text: var(--color-white);
+    --color-background: var(--color-black);
+}

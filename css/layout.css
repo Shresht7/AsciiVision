@@ -1,0 +1,42 @@
+/* LAYOUT STYLES */
+/* ------------- */
+
+header {
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (orientation: landscape) {
+    body {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr repeat(10, 1fr) 1fr;
+    }
+
+    header {
+        grid-row: 1 / 2;
+        grid-column: 1 / 11;
+        padding-inline: 2rem;
+    }
+
+    main {
+        display: grid;
+        place-content: center;
+        grid-row: 2 / 13;
+        grid-column: 1 / 11;
+        padding-inline: 2rem;
+    }
+
+    footer {
+        height: 100%;
+        grid-row: 1 / 13;
+        grid-column: 11 / 13;
+    }
+}

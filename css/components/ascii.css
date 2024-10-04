@@ -1,0 +1,45 @@
+/* ASCII */
+/* ----- */
+
+#ascii-video-container {
+    width: 100%;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#ascii-canvas {
+    width: 100%;
+    z-index: 0;
+}
+
+#ascii-video {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-family-ascii);
+    font-size: var(--font-size-ascii);
+    line-height: var(--font-size-ascii);
+}
+
+/* SOURCE */
+/* ------ */
+
+aside {
+    width: 15dvw;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+aside>* {
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+@media screen and (orientation: portrait) {
+    aside {
+        width: 25dvw;
+    }
+}

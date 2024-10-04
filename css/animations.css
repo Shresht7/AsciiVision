@@ -1,0 +1,32 @@
+/* ========================== */
+/* ANIMATIONS AND TRANSITIONS */
+/* ========================== */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.fade-in {
+    animation: fade-in var(--transition-duration) ease-in forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fade-out var(--transition-duration) ease-out forwards;
+}
