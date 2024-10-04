@@ -125,7 +125,7 @@ async function start() {
     renderer.setup()
     await video.captureStream()
     draw()
-    showNotification('▶️ Playback started!')
+    // showNotification('▶️ Playback started!')
 }
 
 // const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
@@ -139,7 +139,7 @@ async function stop() {
     video.stop()
     renderer.clean()
     source.element.classList.add(CONSTANTS.CSS_HIDDEN)
-    showNotification('🛑 Playback stopped!')
+    // showNotification('🛑 Playback stopped!')
 }
 
 // const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
