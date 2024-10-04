@@ -120,18 +120,18 @@ async function start() {
     showNotification('▶️ Playback started!')
 }
 
-const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
-startBtn.addEventListener('click', start)
+// const startBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_START))
+// startBtn.addEventListener('click', start)
 
 // STOP CAPTURE BUTTON
 // -------------------
 
-// async function stop() {
-//     video.stop()
-//     renderer.clean()
-//     source.element.classList.add('hide')
-//     showNotification('🛑 Playback stopped!')   
-// }
+async function stop() {
+    video.stop()
+    renderer.clean()
+    source.element.classList.add('hide')
+    showNotification('🛑 Playback stopped!')
+}
 
 // const stopBtn = /** @type HTMLButtonElement */(document.getElementById(CONSTANTS.CTRL_STOP))
 // stopBtn.addEventListener('click', stop)
