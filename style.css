@@ -316,7 +316,7 @@ main {
 /* ------ */
 
 aside {
-    width: 150px;
+    width: 15dvw;
     position: absolute;
     right: 0;
     top: 0;
@@ -326,6 +326,12 @@ aside {
 aside>* {
     width: 100%;
     border-radius: 0.5rem;
+}
+
+@media screen and (orientation: portrait) {
+    aside {
+        width: 25dvw;
+    }
 }
 
 /* CAMERA CONTROLS */
