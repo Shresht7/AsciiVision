@@ -33,6 +33,19 @@
 
     <main>
 
+        <!-- ASCII -->
+        <section id="ascii-video-container">
+            <!-- TODO: #7 Add Welcome Text and Instructions -->
+            <div id="ascii-video"></div>
+            <canvas id="ascii-canvas"></canvas>
+
+            <!-- SOURCE -->
+            <aside>
+                <video id="source-video">Video Steam Unavailable</video>
+                <canvas id="source-canvas" hidden></canvas>
+            </aside>
+        </section>
+
         <!-- CONTROL PANEL -->
         <section id="control-panel" class="hide">
             <h2>Control Panel</h2>
@@ -77,19 +90,6 @@
                 <input id="sensitivity-slider" name="sensitivity-slider" type="range" min="0" max="30" value="15"
                     class="full-width" />
             </div>
-        </section>
-
-        <!-- ASCII -->
-        <section id="ascii-video-container">
-            <!-- TODO: #7 Add Welcome Text and Instructions -->
-            <div id="ascii-video"></div>
-            <canvas id="ascii-canvas"></canvas>
-
-            <!-- SOURCE -->
-            <aside>
-                <video id="source-video">Video Steam Unavailable</video>
-                <canvas id="source-canvas" hidden></canvas>
-            </aside>
         </section>
 
     </main>
