@@ -112,6 +112,7 @@ toggleCameraBtn.addEventListener('click', () => {
 // START CAPTURE BUTTON
 // --------------------
 
+/** Start the video player */
 async function start() {
     source.element.classList.remove('hide')
     renderer.setup()
@@ -126,6 +127,7 @@ async function start() {
 // STOP CAPTURE BUTTON
 // -------------------
 
+/** Stop the video player */
 async function stop() {
     video.stop()
     renderer.clean()
@@ -142,17 +144,22 @@ async function stop() {
 const download = /** @type HTMLAnchorElement */ (document.getElementById(CONSTANTS.OFFSCREEN_ANCHOR))
 
 /** Time in milliseconds to disable the screenshot button as an attempt to prevent the user from spamming it. */
-const timeoutDuration = 500
+const SCREENSHOT_TIMEOUT_DURATION = 500
 
 const screenshotButton = /** @type HTMLButtonElement */ (document.getElementById(CONSTANTS.SCREENSHOT))
-screenshotButton.addEventListener('click', () => {
+
+/**
+ * Take a screenshot of the rendered output
+ * @param {string} name Name of the screenshot file
+ */
+function takeScreenshot(name = "screenshot.png") {
     //  Get the snapshot from the renderer
     const snapshot = renderer.snapshot()
 
     if (renderer.type === 'canvas') {
         //  If using the canvas-based renderer, download the screenshot
         download.setAttribute('href', snapshot)
-        download.setAttribute('download', 'screenshot.png')
+        download.setAttribute('download', name)
         download.click()
         showNotification('📸 Screenshot Captured!')
     } else if (renderer.type === 'html' || renderer.type === 'text') {
@@ -163,13 +170,18 @@ screenshotButton.addEventListener('click', () => {
 
     //  Disable the screenshot button for timeoutDuration to prevent spam
     screenshotButton.setAttribute('disabled', 'true')
-    setTimeout(() => { screenshotButton.removeAttribute('disabled') }, timeoutDuration)
+    setTimeout(() => { screenshotButton.removeAttribute('disabled') }, SCREENSHOT_TIMEOUT_DURATION)
+}
+
+// Register the on click listener for the screenshot button
+screenshotButton.addEventListener('click', () => {
+    takeScreenshot('screenshot.png')
 })
 
-// ==========
 // DOM LOADED
-// ==========
+// ----------
 
+// Start the rendered as soon as the DOM Content is ready
 document.addEventListener('DOMContentLoaded', () => {
     start()
 })
