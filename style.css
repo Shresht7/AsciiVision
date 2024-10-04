@@ -118,11 +118,6 @@ input {
     padding: 0.33rem 0.25rem;
 }
 
-select,
-input:not(input[type="checkbox"]) {
-    width: 100%;
-}
-
 input[type="range"] {
     cursor: grab;
 }
@@ -134,6 +129,10 @@ input[type="range"]:active {
 /* ========= */
 /* UTILITIES */
 /* ========= */
+
+.full-width {
+    width: 100%;
+}
 
 .flex {
     display: flex;
