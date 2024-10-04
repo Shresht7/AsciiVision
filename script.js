@@ -4,10 +4,10 @@
 //  LIBRARY
 //  =======
 
-import * as CONSTANTS from "./modules/constants.js"
-import { source, video } from './modules/Source/index.js'
-import { renderer, selectRenderer } from "./modules/Renderer/index.js"
-import { showNotification } from "./modules/utilities/index.js"
+import * as CONSTANTS from "./javascript/constants.js"
+import { source, video } from './javascript/Source/index.js'
+import { renderer, selectRenderer } from "./javascript/Renderer/index.js"
+import { showNotification } from "./javascript/utilities/index.js"
 
 //  ====
 //  DRAW
